@@ -1,0 +1,116 @@
+body {
+	background: rgb(255, 251, 236);
+}
+
+$card-bg-color: #fff;
+$card-bg-disabled: #dfdfdf;
+$card-disabled-tint: rgba(199, 200, 204, 0.539);
+$color-red: rgb(183, 24, 32);
+$color-black: rgb(44, 43, 49);
+$color-disabled: rgb(116, 115, 121);
+
+$card-shadow: 0.25em 0.5em 5em rgba(0, 0, 0, 0.1);
+
+.container {
+	height: 100vh;
+	width: 100vw;
+	@extend .center-child;
+}
+
+.center-child {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.color-red {
+	color: $color-red;
+}
+.color-black {
+	color: $color-black;
+}
+
+.card-display {
+	font-size: 16px;
+
+	width: 800px;
+	height: 600px;
+	box-shadow: 0px 16px 80px rgba(0, 0, 0, 0.05);
+	@extend .center-child;
+	> * {
+		margin: 0px -1.5em;
+	}
+}
+
+.card {
+	position: relative;
+	font-size: 1em;
+
+	height: calc(4 * 3em);
+	width: calc(4 * 2em);
+
+	border-radius: 0.5em;
+
+	box-shadow: $card-shadow;
+
+	pointer: cursor;
+
+	overflow: hidden;
+}
+
+.card > div {
+	position: absolute;
+	inset: 0 0 0 0;
+	backface-visibility: hidden;
+}
+
+.card .face {
+	padding: 0.75em;
+	background: white;
+}
+.card .back {
+	background: $color-red;
+	z-index: -1;
+}
+
+.card {
+	transform: rotate3d(0, 0, 90);
+}
+
+.card.disabled {
+	background: $card-bg-disabled;
+}
+.card.disabled::after {
+	z-index: 1;
+	background: $card-disabled-tint;
+	position: absolute;
+	inset: 0 0 0 0;
+}
+.card-text {
+	display: inline-block;
+	width: 1em;
+
+	font-family: Helvetica;
+	font-weight: 800;
+	font-size: 3em;
+
+	display: inline-flex;
+	flex-direction: column;
+
+	justify-content: center;
+	align-items: center;
+
+	&,
+	* {
+		user-select: none;
+	}
+}
+
+.card-rank {
+	font-family: 'DIN Pro';
+	line-height: 100%;
+	font-weight: 900;
+}
+.card-suit {
+	font-size: 0.8em;
+}

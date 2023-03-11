@@ -1,0 +1,87 @@
+/* spacing */
+body {
+	background: black;
+}
+
+table {
+	color: white;
+	display: grid;
+	grid-template-columns: 24px repeat(4, minmax(80px, 1fr));
+	border-collapse: collapse;
+	font-family: sans-serif;
+	tr {
+		th + th,
+		th + td,
+		td + th,
+		td + td {
+			border-left: 1px solid rgb(159, 188, 171);
+		}
+	}
+}
+thead,
+tbody,
+tfoot,
+tr {
+	display: contents;
+}
+
+th,
+td {
+	text-align: left;
+	padding: 0px 4px;
+	// border: 1px solid red;
+}
+
+table.score-table {
+	background: rgb(40, 60, 52);
+	tr.header-row {
+		td,
+		th {
+			background: rgb(67, 126, 98);
+		}
+	}
+	tr.name-row {
+		th {
+			text-align: center;
+		}
+	}
+	td.score-cell,
+	th.set-total {
+		display: flex;
+		span.cell-bet-number {
+			flex: 0 0 16px;
+			color: rgb(147, 147, 147);
+		}
+		span.cell-score-number {
+			color: rgb(210, 210, 210);
+			flex: 1 1 24px;
+		}
+	}
+
+	span.cell-round-number {
+		font-weight: normal;
+		color: rgb(206, 206, 206);
+	}
+	th.set-number,
+	th.round-number {
+		text-align: center;
+	}
+
+	th.set-number {
+		font-weight: 400;
+		color: rgb(196, 196, 196);
+	}
+
+	tbody {
+		transition: 0.3s;
+	}
+	tbody.block-hidden {
+		> tr {
+			display: none;
+		}
+	}
+
+	tr.set-score-row {
+		cursor: pointer;
+	}
+}
