@@ -1,14 +1,30 @@
-import { UICard } from '../lib/game-logic/card/CardNames'
+import { UICard as UICardInfo } from '../lib/game-logic/card/CardNames'
 
-interface CardProps {
+export function JokerCard(props: IJokerCard) {
+	const { id } = props
+	const color = id === 'joker1' ? 'red' : 'black'
+
+	return (
+		<div className="card card-3d card-tilt-js">
+			<div className="face">
+				<div className={`card-text color-${color}`}>
+					<span className="card-joker">Joker</span>
+				</div>
+			</div>
+			<div className="back"></div>
+		</div>
+	)
+}
+
+interface IRegularCardProps {
 	rank: Rank
 	suit: Suit
 }
 
-export const Card = (props: CardProps) => {
+export const RegularCard = (props: IRegularCardProps) => {
 	const { rank, suit } = props
 
-	const card = new UICard(rank, suit)
+	const card = new UICardInfo(rank, suit)
 	const color = card.color
 
 	return (

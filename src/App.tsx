@@ -1,41 +1,34 @@
 import './scss/main.scss'
 
-import { Card } from './components/Card'
+import { JokerCard, RegularCard } from './components/Card'
 
-function JokerCardComponent(props: IJokerCard) {
-	const { id } = props
-	const color = id === 'joker1' ? 'red' : 'black'
-
-	return (
-		<div className="card card-3d card-tilt-js">
-			<div className="face">
-				<div className={`card-text color-${color}`}>
-					<span className="card-joker">Joker</span>
-				</div>
-			</div>
-			<div className="back"></div>
-		</div>
-	)
-}
+import { Deck } from './lib/game-logic/card/CardDeck'
 
 interface CardDeckProps {
 	cards: Card[]
 }
 
 function CardDeck(props: CardDeckProps) {
+	const { cards } = props
 	return (
 		<div className="card-display">
-			<Card rank="7" suit="hearts" />
+			{cards.map((card) => {
+				if (card.type === 'joker')
+					return <JokerCard type="joker" id={card.id} />
+				if (card.type === 'regular')
+					return <RegularCard rank={card.rank} suit={card.suit} />
+			})}
 		</div>
 	)
 }
 
 function App() {
+	const deck = new Deck()
+	deck.reset()
+
 	return (
 		<div className="main">
-			<div className="card-display">
-				<Card rank="7" suit="hearts" />
-			</div>
+			<CardDeck cards={deck.cards} />
 		</div>
 	)
 }

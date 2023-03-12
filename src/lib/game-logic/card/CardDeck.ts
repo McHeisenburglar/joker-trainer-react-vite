@@ -2,10 +2,10 @@ import { RANKS, SUITS } from '../../global/constants'
 import { shuffleAlg } from '../../helpers/random'
 
 export class Deck {
-	private cards: Card[]
+	private _cards: Card[]
 
 	constructor() {
-		this.cards = this.generate()
+		this._cards = this.generate()
 	}
 
 	private generate(): Card[] {
@@ -30,16 +30,20 @@ export class Deck {
 	}
 
 	shuffle(): void {
-		shuffleAlg(this.cards)
+		shuffleAlg(this._cards)
 	}
 
 	reset(): void {
-		this.cards = this.generate()
+		this._cards = this.generate()
 		this.shuffle()
 	}
 	pop(): Card {
-		const card = this.cards.pop()
+		const card = this._cards.pop()
 		if (!card) throw new Error("Can't pop card. Deck empty.")
 		return card
+	}
+
+	get cards(): Card[] {
+		return this._cards
 	}
 }
