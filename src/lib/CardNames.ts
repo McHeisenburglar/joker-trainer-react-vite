@@ -4,6 +4,7 @@ import RankMaps from './RankMaps.js'
 export interface UISuitName {
 	name: string
 	emoji: string
+	html: string
 	unicode: string
 }
 export interface UIRankName {
@@ -13,10 +14,11 @@ export interface UIRankName {
 }
 
 export interface UICardName {
-	unicode: string
+	html: string
 	emoji: string
 	normal: string
 	full: string
+	unicode: string
 }
 
 export class UICard {
@@ -39,7 +41,8 @@ export class UICard {
 		return {
 			name: SuitMaps.SUIT_NAMES[this._suit],
 			emoji: SuitMaps.SUIT_EMOJIS[this._suit],
-			unicode: SuitMaps.SUIT_CODES[this._suit],
+			html: SuitMaps.SUIT_HTML[this._suit],
+			unicode: SuitMaps.SUIT_UNICODE[this._suit],
 		}
 	}
 
@@ -55,6 +58,7 @@ export class UICard {
 		return {
 			normal: `${this.rank.normal} of ${this.suit.name}`,
 			emoji: `${this.rank.short} ${this.suit.emoji}`,
+			html: `${this.rank.short} ${this.suit.html}`,
 			unicode: `${this.rank.short} ${this.suit.unicode}`,
 			full: `${this.rank.long} of ${this.suit.name}`,
 		}
