@@ -1,4 +1,3 @@
-// import { useState } from 'react'
 import './scss/main.scss'
 
 import { Card } from './components/Card'

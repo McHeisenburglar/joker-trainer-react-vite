@@ -15,6 +15,8 @@ export const Card = (props: CardProps) => {
 	const card = new UICard(rank, suit)
 	const color = card.color
 
+	const test = '&diams;'
+
 	return (
 		<div className="card card-3d card-tilt-js">
 			<div className="face">
