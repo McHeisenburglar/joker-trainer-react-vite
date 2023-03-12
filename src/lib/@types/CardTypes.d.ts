@@ -26,3 +26,16 @@ type CardMap<Keys extends Suit | Rank, Type> = {
 // Game state
 type SetID = number
 type RoundID = number | string
+
+interface IRegularCard {
+	type: 'regular'
+	suit: Suit
+	rank: Rank
+}
+
+interface IJokerCard {
+	type: 'joker'
+	id: 'joker1' | 'joker2'
+}
+
+type Card = IRegularCard | IJokerCard

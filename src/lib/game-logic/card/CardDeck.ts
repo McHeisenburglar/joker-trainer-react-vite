@@ -1,18 +1,5 @@
 import { RANKS, SUITS } from '../../global/constants'
-import { shuffleAlg } from '../../helpers/random.js'
-
-export interface IRegularCard {
-	type: 'regular'
-	suit: Suit
-	rank: Rank
-}
-
-export interface IJokerCard {
-	type: 'joker'
-	id: string
-}
-
-export type Card = IRegularCard | IJokerCard
+import { shuffleAlg } from '../../helpers/random'
 
 export class Deck {
 	private cards: Card[]

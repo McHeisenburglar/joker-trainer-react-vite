@@ -2,30 +2,9 @@ import './scss/main.scss'
 
 import { Card } from './components/Card'
 
-type CardInfo = {
-	type: 'regular' | 'joker'
-}
-
-export interface IRegularCard {
-	type: 'regular'
-	suit: Suit
-	rank: Rank
-}
-
-export interface IJokerCard {
-	type: 'joker'
-	id: string
-}
-
-export type Card = IRegularCard | IJokerCard
-
-interface JokerCardProps {
-	id: 0 | 1
-}
-
-function JokerCard(props: JokerCardProps) {
+function JokerCardComponent(props: IJokerCard) {
 	const { id } = props
-	const color = id === 0 ? 'red' : 'black'
+	const color = id === 'joker1' ? 'red' : 'black'
 
 	return (
 		<div className="card card-3d card-tilt-js">
