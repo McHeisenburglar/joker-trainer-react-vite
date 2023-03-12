@@ -1,8 +1,4 @@
-// // console.log('Hello from cardDeal.ts')
-
-// export {}
-
-import { UICard } from '../lib/CardNames'
+import { UICard } from '../lib/src/game-logic/card/CardNames'
 
 interface CardProps {
 	rank: Rank
@@ -14,8 +10,6 @@ export const Card = (props: CardProps) => {
 
 	const card = new UICard(rank, suit)
 	const color = card.color
-
-	const test = '&diams;'
 
 	return (
 		<div className="card card-3d card-tilt-js">
