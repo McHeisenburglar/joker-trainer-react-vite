@@ -1,4 +1,4 @@
-import { UICard } from '../lib/src/game-logic/card/CardNames'
+import { UICard } from '../lib/game-logic/card/CardNames'
 
 interface CardProps {
 	rank: Rank

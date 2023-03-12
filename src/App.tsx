@@ -39,6 +39,10 @@ function JokerCard(props: JokerCardProps) {
 	)
 }
 
+interface CardDeckProps {
+	cards: Card[]
+}
+
 function CardDeck(props: CardDeckProps) {
 	return (
 		<div className="card-display">
