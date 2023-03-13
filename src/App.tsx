@@ -1,6 +1,7 @@
 import './scss/main.scss'
 
 import { JokerCard, RegularCard } from './components/Card'
+import { useState } from 'react'
 
 import { Deck } from './lib/game-logic/card/CardDeck'
 
@@ -22,10 +23,25 @@ function CardDeck(props: CardDeckProps) {
 	)
 }
 
+function FlipCard() {
+	const [isFlipped, setIsFlipped] = useState(false)
+	const onClick = () => {
+		setIsFlipped(!isFlipped)
+	}
+	return (
+		<div className="flip-card-test" onClick={onClick}>
+			<div className={`cardd-scene`}>
+				<div className={`cardd ${isFlipped ? 'cardd-flipped' : ''}`}>
+					<div className="cardd-face cardd-face-front"></div>
+					<div className="cardd-face cardd-face-back"></div>
+				</div>
+			</div>
+		</div>
+	)
+}
+
 function App() {
 	const deck = new Deck()
-	// deck.shuffle()
-
 	return (
 		<div className="main">
 			<CardDeck cards={deck.cards} />

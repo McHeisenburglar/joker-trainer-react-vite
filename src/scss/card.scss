@@ -42,26 +42,31 @@ $card-shadow: 0.25em 0.5em 5em rgba(0, 0, 0, 0.1);
 // 	}
 // }
 
-.card {
-	position: relative;
-	display: inline-block;
-	font-size: 1em;
-
+.card-container {
 	height: calc(4 * 3em);
 	width: calc(4 * 2em);
-
+	perspective: 600px;
+	display: inline-block;
 	border-radius: 0.5em;
+}
+
+.card {
+	position: relative;
+	font-size: 1em;
+
+	height: 100%;
+	width: 100%;
+	transform-style: preserve-3d;
+
 	border: 1px solid rgb(44, 43, 49);
-	// box-shadow: $card-shadow;
 
-	// cursor: pointer;
-
-	overflow: hidden;
+	transition: 0.5s ease-in-out;
 }
 
 .card > div {
 	position: absolute;
-	inset: 0 0 0 0;
+	height: 100%;
+	width: 100%;
 	backface-visibility: hidden;
 }
 
@@ -71,11 +76,11 @@ $card-shadow: 0.25em 0.5em 5em rgba(0, 0, 0, 0.1);
 }
 .card .back {
 	background: $color-red;
-	z-index: -1;
+	transform: rotateY(180deg);
 }
 
-.card {
-	transform: rotate3d(0, 0, 90);
+.card.is-flipped {
+	transform: rotateY(180deg);
 }
 
 .card.disabled {
@@ -122,4 +127,35 @@ $card-shadow: 0.25em 0.5em 5em rgba(0, 0, 0, 0.1);
 
 .card-joker.color-black svg {
 	fill: #32a786;
+}
+
+.flip-card-test {
+	.cardd-scene {
+		width: 200px;
+		height: 260px;
+		perspective: 600px;
+	}
+	.cardd {
+		width: 100%;
+		height: 100%;
+		position: relative;
+		transition: transform 1s;
+		transform-style: preserve-3d;
+	}
+	.cardd-flipped {
+		transform: rotateY(180deg);
+	}
+	.cardd-face {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		backface-visibility: hidden;
+		&.cardd-face-front {
+			background: red;
+		}
+		&.cardd-face-back {
+			background: blue;
+			transform: rotateY(180deg);
+		}
+	}
 }

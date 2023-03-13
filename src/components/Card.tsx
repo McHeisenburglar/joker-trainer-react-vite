@@ -1,4 +1,5 @@
 import { UICard as UICardInfo } from '../lib/game-logic/card/CardNames'
+import { useState } from 'react'
 
 function JokerIcon() {
 	return (
@@ -16,17 +17,28 @@ function JokerIcon() {
 }
 
 export function JokerCard(props: IJokerCard) {
+	const [showFace, setShowFace] = useState(true)
+
+	const onClick = () => {
+		setShowFace(!showFace)
+	}
+
 	const { id } = props
 	const color = id === 'joker1' ? 'red' : 'black'
 
 	return (
-		<div className="card card-3d card-tilt-js">
-			<div className="face">
-				<div className={`card-text card-joker color-${color}`}>
-					<JokerIcon />
+		<div className="card-container">
+			<div
+				className={`card card-3d card-tilt-js ${!showFace ? 'is-flipped' : ''}`}
+				onClick={onClick}
+			>
+				<div className="face">
+					<div className={`card-text card-joker color-${color}`}>
+						<JokerIcon />
+					</div>
 				</div>
+				<div className="back"></div>
 			</div>
-			<div className="back"></div>
 		</div>
 	)
 }
@@ -37,20 +49,30 @@ interface IRegularCardProps {
 }
 
 export const RegularCard = (props: IRegularCardProps) => {
-	const { rank, suit } = props
+	const [showFace, setShowFace] = useState(true)
 
+	const onClick = () => {
+		setShowFace(!showFace)
+	}
+
+	const { rank, suit } = props
 	const card = new UICardInfo(rank, suit)
 	const color = card.color
 
 	return (
-		<div className="card card-3d card-tilt-js">
-			<div className="face">
-				<div className={`card-text color-${color}`}>
-					<span className="card-rank">{card.rank.short}</span>
-					<span className="card-suit">{card.suit.unicode}</span>
+		<div className="card-container">
+			<div
+				className={`card card-3d card-tilt-js ${!showFace ? 'is-flipped' : ''}`}
+				onClick={onClick}
+			>
+				<div className="face">
+					<div className={`card-text color-${color}`}>
+						<span className="card-rank">{card.rank.short}</span>
+						<span className="card-suit">{card.suit.unicode}</span>
+					</div>
 				</div>
+				<div className="back"></div>
 			</div>
-			<div className="back"></div>
 		</div>
 	)
 }
