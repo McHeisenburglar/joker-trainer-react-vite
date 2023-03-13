@@ -1,5 +1,6 @@
 import { UICard as UICardInfo } from '../lib/game-logic/card/CardNames'
 import { useState } from 'react'
+import Tilt from 'react-tilt'
 
 function JokerIcon() {
 	return (
@@ -27,19 +28,27 @@ export function JokerCard(props: IJokerCard) {
 	const color = id === 'joker1' ? 'red' : 'black'
 
 	return (
-		<div className="card-container">
-			<div
-				className={`card card-3d card-tilt-js ${!showFace ? 'is-flipped' : ''}`}
-				onClick={onClick}
-			>
-				<div className="face">
-					<div className={`card-text card-joker color-${color}`}>
-						<JokerIcon />
+		<Tilt
+			className="Tilt"
+			options={{ max: 25 }}
+			style={{ height: 250, width: 250 }}
+		>
+			<div className="Tilt-inner card-container">
+				<div
+					className={`card card-3d card-tilt-js ${
+						!showFace ? 'is-flipped' : ''
+					}`}
+					onClick={onClick}
+				>
+					<div className="face">
+						<div className={`card-text card-joker color-${color}`}>
+							<JokerIcon />
+						</div>
 					</div>
+					<div className="back"></div>
 				</div>
-				<div className="back"></div>
 			</div>
-		</div>
+		</Tilt>
 	)
 }
 
@@ -60,20 +69,28 @@ export const RegularCard = (props: IRegularCardProps) => {
 	const color = card.color
 
 	return (
-		<div className="card-container">
-			<div
-				className={`card card-3d card-tilt-js ${!showFace ? 'is-flipped' : ''}`}
-				onClick={onClick}
-			>
-				<div className="face">
-					<div className={`card-text color-${color}`}>
-						<span className="card-rank">{card.rank.short}</span>
-						<span className="card-suit">{card.suit.unicode}</span>
+		<Tilt
+			className="Tilt custom-tilt"
+			options={{ max: 25 }}
+			style={{ height: 250, width: 250 }}
+		>
+			<div className="Tilt-inner card-container">
+				<div
+					className={`card card-3d card-tilt-js ${
+						!showFace ? 'is-flipped' : ''
+					}`}
+					onClick={onClick}
+				>
+					<div className="face">
+						<div className={`card-text color-${color}`}>
+							<span className="card-rank">{card.rank.short}</span>
+							<span className="card-suit">{card.suit.unicode}</span>
+						</div>
 					</div>
+					<div className="back"></div>
 				</div>
-				<div className="back"></div>
 			</div>
-		</div>
+		</Tilt>
 	)
 }
 
