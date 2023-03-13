@@ -24,7 +24,7 @@ function CardDeck(props: CardDeckProps) {
 
 function App() {
 	const deck = new Deck()
-	deck.reset()
+	// deck.shuffle()
 
 	return (
 		<div className="main">

@@ -13,13 +13,14 @@ export class Deck {
 
 		for (let rank of RANKS) {
 			for (let suit of SUITS) {
-				if (rank === '6' && (suit === 'clubs' || suit === 'spades')) break
-				const card: Card = {
-					type: 'regular',
-					rank,
-					suit,
+				if (!(rank === '6' && (suit === 'clubs' || suit === 'spades'))) {
+					const card: Card = {
+						type: 'regular',
+						rank,
+						suit,
+					}
+					deck.push(card)
 				}
-				deck.push(card)
 			}
 		}
 
