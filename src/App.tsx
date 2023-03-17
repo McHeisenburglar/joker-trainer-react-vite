@@ -1,50 +1,52 @@
-import './scss/main.scss'
+import './scss/reset.scss'
+// import './scss/main.scss'
+import './scss/chat-gpt.scss'
 
 import { JokerCard, RegularCard } from './components/Card'
 import { useState } from 'react'
 
 import { Deck } from './lib/game-logic/card/CardDeck'
 
+import Card from './components/chat-gpt/Card'
+import HiddenCard from './components/chat-gpt/HiddenCard'
+import CardHand from './components/chat-gpt/CardHand'
+
+import { Deck as CardDeck } from './lib/game-logic/card/CardDeck'
+
 interface CardDeckProps {
 	cards: Card[]
 }
 
-function CardDeck(props: CardDeckProps) {
-	const { cards } = props
-	return (
-		<div className="card-display">
-			{cards.map((card) => {
-				if (card.type === 'joker')
-					return <JokerCard type="joker" id={card.id} />
-				if (card.type === 'regular')
-					return <RegularCard rank={card.rank} suit={card.suit} />
-			})}
-		</div>
-	)
-}
+function getRandomCards(numCards: number): IRegularCard[] {
+	let deck = new CardDeck()
+	deck.shuffle()
 
-function FlipCard() {
-	const [isFlipped, setIsFlipped] = useState(false)
-	const onClick = () => {
-		setIsFlipped(!isFlipped)
+	const cards: IRegularCard[] = []
+	let i = 0
+
+	while (i < numCards) {
+		try {
+			const card = deck.pop()
+			if (card.type === 'regular') {
+				cards.push(card)
+				i++
+			}
+		} catch (error) {
+			deck = new CardDeck()
+		}
 	}
-	return (
-		<div className="flip-card-test" onClick={onClick}>
-			<div className={`cardd-scene`}>
-				<div className={`cardd ${isFlipped ? 'cardd-flipped' : ''}`}>
-					<div className="cardd-face cardd-face-front"></div>
-					<div className="cardd-face cardd-face-back"></div>
-				</div>
-			</div>
-		</div>
-	)
+
+	return cards
 }
 
 function App() {
-	const deck = new Deck()
+	const hand = getRandomCards(10)
+
 	return (
 		<div className="main">
-			<CardDeck cards={deck.cards} />
+			<CardHand cards={hand} />
+			<Card rank="6" suit="spades" />
+			<HiddenCard />
 		</div>
 	)
 }
