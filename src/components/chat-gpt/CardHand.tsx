@@ -82,7 +82,7 @@ function getPlayableCards(
 	}
 }
 
-function allPlayableCards(cards: Card[]): Card[] {
+function allPlayableCards(cards: Card[]) {
 	return cards.map((card) => ({ ...card, playable: true }))
 }
 
@@ -100,7 +100,7 @@ const CardHand: React.FC<CardHandProps> = ({
 		<ul className="card-hand shown">
 			{playableCards.map((card, index) => (
 				<li key={index} className="card-hand-item">
-					<Card card={card} />
+					<Card card={card} playable={card.playable} />
 				</li>
 			))}
 		</ul>
