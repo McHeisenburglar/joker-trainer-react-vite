@@ -2,12 +2,19 @@ import React from 'react'
 import Card from './Card'
 
 type CardHandProps = {
-	cards: IRegularCard[]
+	cards: Card[]
 	playedCard?: IRegularCard
 	trumpSuit: Suit | null
 }
 
-function sortCards(cards: IRegularCard[]): IRegularCard[] {
+function sortCards(cards: Card[]): Card[] {
+	const regularCards = cards.filter(
+		(card) => card.type === 'regular'
+	) as IRegularCard[]
+	const jokerCards = cards.filter(
+		(card) => card.type === 'joker'
+	) as IJokerCard[]
+
 	// Define the order of the ranks
 	const rankOrder: Rank[] = [
 		'ace',
@@ -22,7 +29,7 @@ function sortCards(cards: IRegularCard[]): IRegularCard[] {
 	]
 
 	// Sort the cards by their rank and suit
-	cards.sort((a, b) => {
+	regularCards.sort((a, b) => {
 		if (a.suit < b.suit) return -1
 		if (a.suit > b.suit) return 1
 		return rankOrder.indexOf(a.rank) - rankOrder.indexOf(b.rank)
@@ -30,7 +37,7 @@ function sortCards(cards: IRegularCard[]): IRegularCard[] {
 
 	// Group the cards by suit
 	const suits = {} as CardMap<Suit, IRegularCard[]>
-	cards.forEach((card) => {
+	regularCards.forEach((card) => {
 		if (!suits[card.suit]) {
 			suits[card.suit] = []
 		}
@@ -44,24 +51,30 @@ function sortCards(cards: IRegularCard[]): IRegularCard[] {
 	})
 
 	// Flatten the groups and return the sorted array
-	return groups.flat()
+	return [...jokerCards, ...groups.flat()]
 }
 function getPlayableCards(
-	hand: IRegularCard[],
+	hand: Card[],
 	playedCard: IRegularCard,
 	trumpSuit: Suit | null
 ) {
-	const sameSuitCards = hand.filter((card) => card.suit === playedCard.suit)
-	const trumpCards = hand.filter((card) => card.suit === trumpSuit)
+	const regularCards = hand.filter(
+		(card) => card.type === 'regular'
+	) as IRegularCard[]
+
+	const sameSuitCards = regularCards.filter(
+		(card) => card.suit === playedCard.suit
+	)
+	const trumpCards = regularCards.filter((card) => card.suit === trumpSuit)
 
 	if (sameSuitCards.length > 0) {
 		return hand.map((card) => {
-			const playable = card.suit === playedCard.suit
+			const playable = card.type === 'joker' || card.suit === playedCard.suit
 			return { ...card, playable }
 		})
 	} else if (trumpSuit && trumpCards.length > 0) {
 		return hand.map((card) => {
-			const playable = card.suit === trumpSuit
+			const playable = card.type === 'joker' || card.suit === trumpSuit
 			return { ...card, playable }
 		})
 	} else {
@@ -69,7 +82,7 @@ function getPlayableCards(
 	}
 }
 
-function allPlayableCards(cards: IRegularCard[]): IRegularCard[] {
+function allPlayableCards(cards: Card[]): Card[] {
 	return cards.map((card) => ({ ...card, playable: true }))
 }
 

@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { Deck as CardDeck } from '../../lib/game-logic/card/CardDeck'
+import { getRandomCards } from '../../lib/helpers/random'
+import Card from './Card'
 import CardHand from './CardHand'
 
 class CardsInHand {
-	private _cards: IRegularCard[]
+	private _cards: Card[]
 	constructor() {
 		this._cards = []
 	}
 
-	public addCard(card: IRegularCard) {
+	public addCard(card: Card) {
 		this._cards.push(card)
 	}
 	public clear() {
@@ -30,6 +32,8 @@ const FourPlayerCardGame = () => {
 	])
 	const [trumpSuit, setTrumpSuit] = useState(null)
 
+	const playedCard = getRandomCards(1)[0]
+
 	const dealCards = () => {
 		deck.reset()
 		deck.shuffle()
@@ -45,9 +49,15 @@ const FourPlayerCardGame = () => {
 
 	return (
 		<div>
+			<Card card={playedCard} />
 			<button onClick={dealCards}>Deal Cards</button>
 			{hands.map((hand, index) => (
-				<CardHand key={index} cards={hand.cards} trumpSuit={trumpSuit} />
+				<CardHand
+					key={index}
+					cards={hand.cards}
+					trumpSuit={trumpSuit}
+					playedCard={playedCard}
+				/>
 			))}
 		</div>
 	)

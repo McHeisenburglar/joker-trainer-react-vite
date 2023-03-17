@@ -43,11 +43,16 @@ const Card: React.FC<Props> = ({ card, playable, onClickCallback }) => {
 		const { id } = card as IJokerCard
 		const color = id === 'joker1' ? 'red' : 'black'
 		return (
-			<div className={`card ${playable ? 'playable' : 'disabled'} ${color}`}>
-				<div className="card-content">
-					<div className={`card-text card-joker color-${color}`}>
-						<JokerIcon />
-					</div>
+			<div
+				className={`card card-joker ${
+					playable ? 'playable' : 'disabled'
+				} ${color}`}
+			>
+				<div className="card-content top-left">
+					<JokerIcon />
+				</div>
+				<div className="card-content bottom-right">
+					<JokerIcon />
 				</div>
 			</div>
 		)
