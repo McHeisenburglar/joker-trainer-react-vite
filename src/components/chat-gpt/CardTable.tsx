@@ -3,10 +3,10 @@ import Card from './Card'
 
 type CardTableProps = {
 	cards: {
-		top: IRegularCard
-		right: IRegularCard
-		bottom: IRegularCard
-		left: IRegularCard
+		top: IRegularCard | null
+		right: IRegularCard | null
+		bottom: IRegularCard | null
+		left: IRegularCard | null
 	}
 }
 

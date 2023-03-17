@@ -3,7 +3,7 @@ import './scss/reset.scss'
 import './scss/chat-gpt.scss'
 
 import { JokerCard, RegularCard } from './components/Card'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 
 import { Deck } from './lib/game-logic/card/CardDeck'
 
@@ -37,10 +37,10 @@ function getRandomCards(numCards: number): IRegularCard[] {
 	return cards
 }
 type CardTable = {
-	top: IRegularCard
-	right: IRegularCard
-	bottom: IRegularCard
-	left: IRegularCard
+	top: IRegularCard | null
+	right: IRegularCard | null
+	bottom: IRegularCard | null
+	left: IRegularCard | null
 }
 
 function getRandomCardTable(): CardTable {
@@ -54,16 +54,47 @@ function getRandomCardTable(): CardTable {
 }
 
 const GameView = () => {
-	const hand = getRandomCards(10)
-	const table = getRandomCardTable()
+	const hand = useMemo(() => getRandomCards(10), [])
+	const table = useMemo(() => getRandomCardTable(), [])
+
+	const [showCardHand, setShowCardHand] = useState(true)
+	const [showCardTable, setShowCardTable] = useState(true)
+	const [showHiddenHand, setShowHiddenHand] = useState(true)
 
 	return (
 		<div className="game-view">
-			<HiddenHand position="top" numCards={5} />
-			<HiddenHand position="right" numCards={5} />
-			<CardTable cards={table} />
-			<HiddenHand position="left" numCards={5} />
-			<CardHand cards={hand} />
+			<div className="dev-window">
+				<div>
+					<input
+						type="checkbox"
+						checked={showCardHand}
+						onChange={() => setShowCardHand(!showCardHand)}
+					/>
+					<label>CardHand</label>
+				</div>
+				<div>
+					<input
+						type="checkbox"
+						checked={showCardTable}
+						onChange={() => setShowCardTable(!showCardTable)}
+					/>
+					<label>CardTable</label>
+				</div>
+				<div>
+					<input
+						type="checkbox"
+						checked={showHiddenHand}
+						onChange={() => setShowHiddenHand(!showHiddenHand)}
+					/>
+					<label>HiddenHand</label>
+				</div>
+			</div>
+
+			{showCardHand && <CardHand cards={hand} />}
+			{showCardTable && <CardTable cards={table} />}
+			{showHiddenHand && <HiddenHand position="top" numCards={5} />}
+			{showHiddenHand && <HiddenHand position="left" numCards={5} />}
+			{showHiddenHand && <HiddenHand position="right" numCards={5} />}
 		</div>
 	)
 }
