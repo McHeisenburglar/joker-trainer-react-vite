@@ -24,6 +24,18 @@ class CardsInHand {
 	public get cards() {
 		return this._cards
 	}
+
+	public remove(card: Card) {
+		this._cards = this._cards.filter((c) => {
+			if (card.type === 'joker') {
+				return c.type === 'regular' || c.id !== card.id
+			} else {
+				return (
+					c.type === 'joker' || c.rank !== card.rank || c.suit !== card.suit
+				)
+			}
+		})
+	}
 }
 
 interface IGameState {
@@ -64,7 +76,21 @@ const FourPlayerCardGame = () => {
 		// playedCard = tableCards[previousPlayer()]
 		console.log('new played card!', playedCard())
 		console.log('table cards', tableCards)
+		checkIfClear()
 	}, [gameState])
+
+	const checkIfClear: () => void = () => {
+		const cards = Object.values(tableCards)
+		if (cards.every((card) => card !== null)) {
+			console.log('clearing table')
+			setTableCards({
+				0: null,
+				1: null,
+				2: null,
+				3: null,
+			})
+		}
+	}
 
 	const getTableCards: () => ICardTable = () => gameState.tableCards
 
@@ -96,6 +122,13 @@ const FourPlayerCardGame = () => {
 			currentPlayer: next,
 			tableCards: newTable,
 		})
+		const hand = hands[playerPos]
+		hand.remove(card)
+
+		const newHands = [...hands]
+		newHands[playerPos] = hand
+
+		setHands(newHands)
 	}
 
 	const [deck, setDeck] = useState(new CardDeck())
@@ -134,6 +167,9 @@ const FourPlayerCardGame = () => {
 		<GameContext.Provider value={{ state: gameState }}>
 			<div className="game-container">
 				<p>Current player: {currentPlayer}</p>
+				{trumpSuit && (
+					<Card card={{ type: 'regular', suit: trumpSuit, rank: 'ace' }} />
+				)}
 				<div className="card-hands-container">
 					{!!playedCard() && <Card card={playedCard()!} />}
 					<button onClick={dealCards}>Deal Cards</button>
