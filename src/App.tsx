@@ -53,20 +53,37 @@ function getRandomCardTable(): CardTable {
 	}
 }
 
-function App() {
+const GameView = () => {
 	const hand = getRandomCards(10)
-
 	const table = getRandomCardTable()
 
 	return (
-		<div className="main">
-			<CardHand cards={hand} />
-			<Card rank="6" suit="spades" />
-			<HiddenCard />
-			<HiddenHand count={8} />
+		<div className="game-view">
+			<HiddenHand position="top" numCards={5} />
+			<HiddenHand position="right" numCards={5} />
 			<CardTable cards={table} />
+			<HiddenHand position="left" numCards={5} />
+			<CardHand cards={hand} />
 		</div>
 	)
+}
+
+// export default GameView
+
+function App() {
+	const hand = getRandomCards(10)
+	const table = getRandomCardTable()
+
+	// return (
+	// 	<div className="main">
+	// 		<CardHand cards={hand} />
+	// 		<Card rank="6" suit="spades" />
+	// 		<HiddenCard />
+	// 		<HiddenHand count={8} />
+	// 		<CardTable cards={table} />
+	// 	</div>
+	// )
+	return <GameView />
 }
 
 export default App

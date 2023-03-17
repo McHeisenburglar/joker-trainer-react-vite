@@ -1,19 +1,25 @@
 import React from 'react'
 import HiddenCard from './HiddenCard'
 
-type HiddenHandProps = {
-	count: number
+interface HiddenHandProps {
+	numCards: number
+	position: 'top' | 'right' | 'bottom' | 'left'
 }
 
-const HiddenHand: React.FC<HiddenHandProps> = ({ count }) => {
+const HiddenHand: React.FC<HiddenHandProps> = ({
+	numCards: count,
+	position,
+}) => {
+	const hiddenCards = new Array(count).fill(null)
+
 	return (
-		<div className="card-hand hidden">
-			{[...Array(count)].map((_, index) => (
-				<div key={index} className="card-hand-item">
-					<HiddenCard />
-				</div>
+		<li className={`hidden-hand ${position}`}>
+			{hiddenCards.map((_, i) => (
+				<li className="hidden-hand-item card-hand-item">
+					<HiddenCard key={i} />
+				</li>
 			))}
-		</div>
+		</li>
 	)
 }
 
