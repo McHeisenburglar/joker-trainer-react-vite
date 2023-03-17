@@ -8,6 +8,13 @@ interface GameState {
 	trump?: Suit
 }
 
+interface GameContextType {
+	state: GameState
+	setTableCards: (cards: ICardTable) => void
+	setCurrentPlayer: (player: PlayerPosition) => void
+	setTrump: (suit: Suit) => void
+}
+
 // Define a default value for the game state
 const defaultGameState: GameState = {
 	tableCards: {
@@ -20,7 +27,12 @@ const defaultGameState: GameState = {
 }
 
 // Create the context object for the game state
-export const GameContext = createContext<GameState>(defaultGameState)
+export const GameContext = createContext<GameContextType>({
+	state: defaultGameState,
+	setTableCards: () => {},
+	setCurrentPlayer: () => {},
+	setTrump: () => {},
+})
 
 interface ChildrenProps {
 	children: React.ReactNode
@@ -47,7 +59,7 @@ export const GameProvider: React.FC<ChildrenProps> = ({ children }) => {
 	}
 
 	return (
-		<GameContext.Provider value={{ ...gameState, ...gameActions }}>
+		<GameContext.Provider value={{ state: gameState, ...gameActions }}>
 			{children}
 		</GameContext.Provider>
 	)

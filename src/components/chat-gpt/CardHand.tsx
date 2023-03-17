@@ -12,6 +12,7 @@ type CardHandProps = {
 	playedCard?: IRegularCard
 	trumpSuit: Suit | null
 	playerPos: number
+	onCardClick: (card: Card) => void
 }
 
 const CardHand: React.FC<CardHandProps> = ({
@@ -19,14 +20,19 @@ const CardHand: React.FC<CardHandProps> = ({
 	playedCard,
 	trumpSuit,
 	playerPos,
+	onCardClick,
 }) => {
 	const sortedCards = sortCards(cards)
 	const playableCards = playedCard
 		? getPlayableCards(sortedCards, playedCard, trumpSuit)
 		: allPlayableCards(sortedCards)
 
-	const { currentPlayer } = useGame()
-	const myTurn = currentPlayer === playerPos
+	const { state } = useGame()
+	const myTurn = state.currentPlayer === playerPos
+
+	const handleCardClick = (card: Card) => {
+		onCardClick(card)
+	}
 
 	return (
 		<ul className="card-hand shown">
@@ -38,6 +44,7 @@ const CardHand: React.FC<CardHandProps> = ({
 							card={card}
 							playable={card.playable}
 							disabled={!card.playable}
+							onClickCallback={() => handleCardClick(card)}
 						/>
 					) : (
 						<Card card={card} />

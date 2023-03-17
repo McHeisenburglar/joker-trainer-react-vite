@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useGame } from '../../hooks/useGame'
 import { Deck as CardDeck } from '../../lib/game-logic/card/CardDeck'
 import { getRandomCards } from '../../lib/helpers/random'
 import Card from './Card'
@@ -24,6 +25,7 @@ class CardsInHand {
 }
 
 const FourPlayerCardGame = () => {
+	const { setCurrentPlayer } = useGame()
 	const [deck, setDeck] = useState(new CardDeck())
 	const [hands, setHands] = useState([
 		new CardsInHand(),
@@ -52,6 +54,10 @@ const FourPlayerCardGame = () => {
 		dealCards()
 	}, [])
 
+	const handleClick = (card: Card) => {
+		console.log('clicked', card)
+	}
+
 	return (
 		<div className="game-container">
 			<div className="card-hands-container">
@@ -64,6 +70,7 @@ const FourPlayerCardGame = () => {
 						trumpSuit={trumpSuit}
 						playedCard={playedCard}
 						playerPos={index}
+						onCardClick={handleClick}
 					/>
 				))}
 			</div>
