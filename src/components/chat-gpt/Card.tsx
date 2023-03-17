@@ -50,9 +50,9 @@ const Card: React.FC<Props> = ({
 		const color = id === 'joker1' ? 'red' : 'black'
 		return (
 			<div
-				className={`card card-joker ${
-					playable ? 'playable' : 'disabled'
-				} ${color}`}
+				className={`card card-joker ${playable ? 'playable' : ''} ${
+					disabled ? 'disabled' : ''
+				}${color}`}
 			>
 				<div className="card-content top-left">
 					<JokerIcon />

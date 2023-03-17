@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Deck as CardDeck } from '../../lib/game-logic/card/CardDeck'
 import { getRandomCards } from '../../lib/helpers/random'
 import Card from './Card'
@@ -48,19 +48,28 @@ const FourPlayerCardGame = () => {
 		setHands([...hands])
 	}
 
+	useEffect(() => {
+		dealCards()
+	}, [])
+
 	return (
-		<div>
-			<Card card={playedCard} />
-			<button onClick={dealCards}>Deal Cards</button>
-			{hands.map((hand, index) => (
-				<CardHand
-					key={index}
-					cards={hand.cards}
-					trumpSuit={trumpSuit}
-					playedCard={playedCard}
-				/>
-			))}
-			<CardTable></CardTable>
+		<div className="game-container">
+			<div className="card-hands-container">
+				<Card card={playedCard} />
+				<button onClick={dealCards}>Deal Cards</button>
+				{hands.map((hand, index) => (
+					<CardHand
+						key={index}
+						cards={hand.cards}
+						trumpSuit={trumpSuit}
+						playedCard={playedCard}
+						playerPos={index}
+					/>
+				))}
+			</div>
+			<div className="card-table-container">
+				<CardTable></CardTable>
+			</div>
 		</div>
 	)
 }
