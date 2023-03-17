@@ -5,6 +5,8 @@ import { getRandomCards } from '../../lib/helpers/random'
 import Card from './Card'
 import CardHand from './CardHand'
 import CardTable from './CardTable'
+import { GameContext } from '../../state/gameContext'
+import { Game } from '../../lib/game-logic/game/Game'
 
 class CardsInHand {
 	private _cards: Card[]
@@ -24,9 +26,73 @@ class CardsInHand {
 	}
 }
 
+interface IGameState {
+	currentPlayer: PlayerPosition
+	tableCards: ICardTable
+	trump?: Suit
+}
+
 const FourPlayerCardGame = () => {
-	const { state, setCurrentPlayer, setTableCards } = useGame()
-	const { tableCards } = state
+	let currentPlayer: PlayerPosition = 0
+	let tableCards: ICardTable = {
+		0: null,
+		1: null,
+		2: null,
+		3: null,
+	}
+	const [gameState, setGameState] = useState<IGameState>({
+		currentPlayer: 0,
+		tableCards: {
+			0: null,
+			1: null,
+			2: null,
+			3: null,
+		},
+	})
+
+	const previousPlayer = () => ((currentPlayer + 4 - 1) % 4) as PlayerPosition
+	const nextPlayer = () => ((currentPlayer + 1) % 4) as PlayerPosition
+
+	// let playedCard = tableCards[previousPlayer()]
+	const playedCard: () => Card | null = () => tableCards[previousPlayer()]
+	useEffect(() => {
+		currentPlayer = gameState.currentPlayer
+		tableCards = gameState.tableCards
+		// playedCard = tableCards[previousPlayer()]
+		console.log('new played card!', playedCard())
+		console.log('table cards', tableCards)
+	}, [gameState])
+
+	const setCurrentPlayer = (player: PlayerPosition) => {
+		setGameState({
+			...gameState,
+			currentPlayer: player,
+		})
+	}
+
+	const setTableCards = (cards: ICardTable) => {
+		console.log('setting table cards', cards)
+		setGameState((gameState) => {
+			return {
+				...gameState,
+				tableCards: { ...cards },
+			}
+		})
+	}
+
+	const playCard = (card: Card, playerPos: PlayerPosition) => {
+		const newTable = {
+			...tableCards,
+		}
+		newTable[playerPos] = card
+		const next = nextPlayer()
+		setGameState({
+			...gameState,
+			currentPlayer: next,
+			tableCards: newTable,
+		})
+	}
+
 	const [deck, setDeck] = useState(new CardDeck())
 	const [hands, setHands] = useState([
 		new CardsInHand(),
@@ -34,13 +100,8 @@ const FourPlayerCardGame = () => {
 		new CardsInHand(),
 		new CardsInHand(),
 	])
-	const [trumpSuit, setTrumpSuit] = useState(null)
 
-	const previousPlayer = () =>
-		((state.currentPlayer + 4 - 1) % 4) as PlayerPosition
-	const nextPlayer = () => ((state.currentPlayer + 1) % 4) as PlayerPosition
-
-	const playedCard = tableCards[previousPlayer()]
+	const [trumpSuit, setTrumpSuit] = useState<Suit>('hearts')
 
 	const dealCards = () => {
 		deck.reset()
@@ -61,37 +122,34 @@ const FourPlayerCardGame = () => {
 
 	const handleClick = (card: Card, playerPos: PlayerPosition) => {
 		console.log('clicked', card)
-		const newTable = {
-			...tableCards,
-		}
-		newTable[playerPos] = card
-		setTableCards({
-			...newTable,
-		})
-		setCurrentPlayer(nextPlayer())
-		const playedCard = tableCards[previousPlayer()]
+		playCard(card, playerPos)
 	}
 
 	return (
-		<div className="game-container">
-			<div className="card-hands-container">
-				{!!playedCard && <Card card={playedCard} />}
-				<button onClick={dealCards}>Deal Cards</button>
-				{hands.map((hand, index) => (
-					<CardHand
-						key={index}
-						cards={hand.cards}
-						trumpSuit={trumpSuit}
-						playedCard={playedCard || undefined}
-						playerPos={index as PlayerPosition}
-						onCardClick={handleClick}
-					/>
-				))}
+		<GameContext.Provider value={{ state: gameState }}>
+			<div className="game-container">
+				<p>{currentPlayer}</p>
+				<p>{JSON.stringify(tableCards)}</p>
+				<p>{playedCard()}</p>
+				<div className="card-hands-container">
+					{!!playedCard() && <Card card={playedCard()!} />}
+					<button onClick={dealCards}>Deal Cards</button>
+					{hands.map((hand, index) => (
+						<CardHand
+							key={index}
+							cards={hand.cards}
+							trumpSuit={trumpSuit}
+							playedCard={playedCard() || undefined}
+							playerPos={index as PlayerPosition}
+							onCardClick={handleClick}
+						/>
+					))}
+				</div>
+				<div className="card-table-container">
+					<CardTable></CardTable>
+				</div>
 			</div>
-			<div className="card-table-container">
-				<CardTable></CardTable>
-			</div>
-		</div>
+		</GameContext.Provider>
 	)
 }
 

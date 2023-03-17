@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useGame } from '../../hooks/useGame'
 import {
 	allPlayableCards,
@@ -29,6 +29,10 @@ const CardHand: React.FC<CardHandProps> = ({
 
 	const { state } = useGame()
 	const myTurn = state.currentPlayer === playerPos
+
+	useEffect(() => {
+		console.log('new played card', playedCard)
+	}, [playedCard])
 
 	const handleCardClick = (card: Card) => {
 		onCardClick(card, playerPos)

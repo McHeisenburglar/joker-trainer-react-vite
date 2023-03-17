@@ -44,14 +44,9 @@ const GameView = () => {
 // export default GameView
 
 import FourPlayerCardGame from './components/chat-gpt/FourHands'
-import { GameProvider } from './state/gameContext'
 
 function App() {
-	return (
-		<GameProvider>
-			<FourPlayerCardGame />
-		</GameProvider>
-	)
+	return <FourPlayerCardGame />
 }
 
 export default App

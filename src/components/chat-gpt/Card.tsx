@@ -18,7 +18,6 @@ const Card: React.FC<Props> = ({
 	if (card.type === 'regular') {
 		const { suit, rank } = card as IRegularCard
 		const handleClick = () => {
-			console.log('hello')
 			if (onClickCallback) {
 				onClickCallback(rank, suit)
 			}
