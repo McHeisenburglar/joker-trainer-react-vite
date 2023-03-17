@@ -4,6 +4,7 @@ import './scss/chat-gpt.scss'
 import { useState, useMemo } from 'react'
 
 import CardHand from './components/chat-gpt/CardHand'
+import Card from './components/chat-gpt/Card'
 
 import HiddenHand from './components/chat-gpt/HiddenHand'
 import CardTable from './components/chat-gpt/CardTable'
@@ -14,9 +15,10 @@ import { getRandomCards, getRandomCardTable } from './lib/helpers/random'
 const GameView = () => {
 	const hand = useMemo(() => getRandomCards(10), [])
 	const table = useMemo(() => getRandomCardTable(), [])
+	const playedCard = useMemo(() => getRandomCards(1)[0], [])
 
 	const [components, setComponents] = useState({
-		cardHand: false,
+		cardHand: true,
 		cardTable: true,
 		hiddenHand: false,
 	})
@@ -26,7 +28,10 @@ const GameView = () => {
 	}
 	return (
 		<div className="game-view">
-			{components.cardHand && <CardHand cards={hand} />}
+			<Card {...playedCard}></Card>
+			{components.cardHand && (
+				<CardHand cards={hand} trumpSuit={'spades'} playedCard={playedCard} />
+			)}
 			{components.cardTable && <CardTable cards={table} />}
 			{components.hiddenHand && <HiddenHand position="top" numCards={5} />}
 			{components.hiddenHand && <HiddenHand position="left" numCards={5} />}
