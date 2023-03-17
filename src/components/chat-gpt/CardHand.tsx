@@ -7,10 +7,10 @@ type CardHandProps = {
 
 const CardHand: React.FC<CardHandProps> = ({ cards }) => {
 	return (
-		<ul className="card-hand">
-			{cards.map((card, i) => (
-				<li key={i} className="card-hand-item">
-					<Card rank={card.rank} suit={card.suit} />
+		<ul className="card-hand shown">
+			{cards.map((card, index) => (
+				<li key={index} className="card-hand-item">
+					<Card {...card} />
 				</li>
 			))}
 		</ul>

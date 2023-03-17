@@ -7,9 +7,9 @@ const SUIT_NAMES: CardMap<Suit, string> = {
 
 const SUIT_EMOJIS: CardMap<Suit, string> = {
 	clubs: '♣️',
-	hearts: '♥️',
-	spades: '♠️',
 	diamonds: '♦️',
+	hearts: '❤️',
+	spades: '♠️',
 }
 
 const SUIT_HTML: CardMap<Suit, string> = {
