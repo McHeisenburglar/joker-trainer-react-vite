@@ -1,3 +1,5 @@
+import { Deck as CardDeck } from '../game-logic/card/CardDeck'
+
 export function shuffleAlg<T>(array: T[]): T[] {
 	let currentIndex = array.length,
 		randomIndex
@@ -16,4 +18,42 @@ export function shuffleAlg<T>(array: T[]): T[] {
 	}
 
 	return array
+}
+
+export function getRandomCards(numCards: number): IRegularCard[] {
+	let deck = new CardDeck()
+	deck.shuffle()
+
+	const cards: IRegularCard[] = []
+	let i = 0
+
+	while (i < numCards) {
+		try {
+			const card = deck.pop()
+			if (card.type === 'regular') {
+				cards.push(card)
+				i++
+			}
+		} catch (error) {
+			deck = new CardDeck()
+		}
+	}
+
+	return cards
+}
+type CardTable = {
+	top: IRegularCard | null
+	right: IRegularCard | null
+	bottom: IRegularCard | null
+	left: IRegularCard | null
+}
+
+export function getRandomCardTable(): CardTable {
+	const cards = getRandomCards(4)
+	return {
+		top: cards[0],
+		right: cards[1],
+		bottom: cards[2],
+		left: cards[3],
+	}
 }

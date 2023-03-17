@@ -229,3 +229,16 @@ $card-table-distance: 100px;
 		justify-content: center;
 	}
 }
+
+/* Dev Window */
+.dev-window {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 20px;
+	background-color: rgba(0, 0, 0, 0.7);
+	color: white;
+	font-size: 16px;
+	font-family: Arial, sans-serif;
+	z-index: 9999;
+}
