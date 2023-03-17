@@ -44,6 +44,10 @@ export class Deck {
 		return card
 	}
 
+	is_empty(): boolean {
+		return this._cards.length === 0
+	}
+
 	get cards(): Card[] {
 		return this._cards
 	}
