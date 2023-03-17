@@ -28,7 +28,7 @@ const GameView = () => {
 	}
 	return (
 		<div className="game-view">
-			<Card {...playedCard}></Card>
+			<Card card={playedCard}></Card>
 			{components.cardTable && <CardTable cards={table} />}
 			{components.hiddenHand && <HiddenHand position="top" numCards={5} />}
 			{components.hiddenHand && <HiddenHand position="left" numCards={5} />}

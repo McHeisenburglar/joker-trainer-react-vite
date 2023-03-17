@@ -87,7 +87,7 @@ const CardHand: React.FC<CardHandProps> = ({
 		<ul className="card-hand shown">
 			{playableCards.map((card, index) => (
 				<li key={index} className="card-hand-item">
-					<Card {...card} />
+					<Card card={card} />
 				</li>
 			))}
 		</ul>

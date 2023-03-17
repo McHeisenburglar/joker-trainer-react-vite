@@ -2,7 +2,7 @@ import { UICard as UICardInfo } from '../lib/game-logic/card/CardNames'
 import { useState } from 'react'
 import Tilt from 'react-tilt'
 
-function JokerIcon() {
+export function JokerIcon() {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

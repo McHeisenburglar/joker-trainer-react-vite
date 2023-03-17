@@ -37,9 +37,7 @@ const FourPlayerCardGame = () => {
 			hand.clear()
 			for (let i = 0; i < 9; i++) {
 				const card = deck.pop()
-				if (card.type === 'regular') {
-					hand.addCard(card)
-				}
+				hand.addCard(card)
 			}
 		})
 		setHands([...hands])
