@@ -50,11 +50,14 @@ const FourPlayerCardGame = () => {
 		},
 	})
 
-	const previousPlayer = () => ((currentPlayer + 4 - 1) % 4) as PlayerPosition
-	const nextPlayer = () => ((currentPlayer + 1) % 4) as PlayerPosition
+	const previousPlayer = () =>
+		((getCurrentPlayer() + 4 - 1) % 4) as PlayerPosition
+	const nextPlayer = () => ((getCurrentPlayer() + 1) % 4) as PlayerPosition
+
+	const getCurrentPlayer: () => PlayerPosition = () => gameState.currentPlayer
 
 	// let playedCard = tableCards[previousPlayer()]
-	const playedCard: () => Card | null = () => tableCards[previousPlayer()]
+	const playedCard: () => Card | null = () => getTableCards()[previousPlayer()]
 	useEffect(() => {
 		currentPlayer = gameState.currentPlayer
 		tableCards = gameState.tableCards
@@ -62,6 +65,8 @@ const FourPlayerCardGame = () => {
 		console.log('new played card!', playedCard())
 		console.log('table cards', tableCards)
 	}, [gameState])
+
+	const getTableCards: () => ICardTable = () => gameState.tableCards
 
 	const setCurrentPlayer = (player: PlayerPosition) => {
 		setGameState({
@@ -128,9 +133,7 @@ const FourPlayerCardGame = () => {
 	return (
 		<GameContext.Provider value={{ state: gameState }}>
 			<div className="game-container">
-				<p>{currentPlayer}</p>
-				<p>{JSON.stringify(tableCards)}</p>
-				<p>{playedCard()}</p>
+				<p>Current player: {currentPlayer}</p>
 				<div className="card-hands-container">
 					{!!playedCard() && <Card card={playedCard()!} />}
 					<button onClick={dealCards}>Deal Cards</button>
