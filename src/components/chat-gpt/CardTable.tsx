@@ -7,7 +7,7 @@ type CardTableProps = {
 }
 
 const CardTable: React.FC<CardTableProps> = () => {
-	const cards = useGame().tableCards
+	const cards = useGame().state.tableCards
 	return (
 		<div className="card-table">
 			<div className="card-table-item top">

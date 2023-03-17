@@ -25,7 +25,8 @@ class CardsInHand {
 }
 
 const FourPlayerCardGame = () => {
-	const { setCurrentPlayer } = useGame()
+	const { state, setCurrentPlayer, setTableCards } = useGame()
+	const { tableCards } = state
 	const [deck, setDeck] = useState(new CardDeck())
 	const [hands, setHands] = useState([
 		new CardsInHand(),
@@ -35,7 +36,11 @@ const FourPlayerCardGame = () => {
 	])
 	const [trumpSuit, setTrumpSuit] = useState(null)
 
-	const playedCard = getRandomCards(1)[0]
+	const previousPlayer = () =>
+		((state.currentPlayer + 4 - 1) % 4) as PlayerPosition
+	const nextPlayer = () => ((state.currentPlayer + 1) % 4) as PlayerPosition
+
+	const playedCard = tableCards[previousPlayer()]
 
 	const dealCards = () => {
 		deck.reset()
@@ -54,22 +59,31 @@ const FourPlayerCardGame = () => {
 		dealCards()
 	}, [])
 
-	const handleClick = (card: Card) => {
+	const handleClick = (card: Card, playerPos: PlayerPosition) => {
 		console.log('clicked', card)
+		const newTable = {
+			...tableCards,
+		}
+		newTable[playerPos] = card
+		setTableCards({
+			...newTable,
+		})
+		setCurrentPlayer(nextPlayer())
+		const playedCard = tableCards[previousPlayer()]
 	}
 
 	return (
 		<div className="game-container">
 			<div className="card-hands-container">
-				<Card card={playedCard} />
+				{!!playedCard && <Card card={playedCard} />}
 				<button onClick={dealCards}>Deal Cards</button>
 				{hands.map((hand, index) => (
 					<CardHand
 						key={index}
 						cards={hand.cards}
 						trumpSuit={trumpSuit}
-						playedCard={playedCard}
-						playerPos={index}
+						playedCard={playedCard || undefined}
+						playerPos={index as PlayerPosition}
 						onCardClick={handleClick}
 					/>
 				))}

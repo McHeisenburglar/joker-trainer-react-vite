@@ -9,10 +9,10 @@ import Card from './Card'
 
 type CardHandProps = {
 	cards: Card[]
-	playedCard?: IRegularCard
+	playedCard?: Card
 	trumpSuit: Suit | null
-	playerPos: number
-	onCardClick: (card: Card) => void
+	playerPos: PlayerPosition
+	onCardClick: (card: Card, playerPos: PlayerPosition) => void
 }
 
 const CardHand: React.FC<CardHandProps> = ({
@@ -31,7 +31,7 @@ const CardHand: React.FC<CardHandProps> = ({
 	const myTurn = state.currentPlayer === playerPos
 
 	const handleCardClick = (card: Card) => {
-		onCardClick(card)
+		onCardClick(card, playerPos)
 	}
 
 	return (

@@ -46,9 +46,13 @@ export function sortCards(cards: Card[]): Card[] {
 }
 export function getPlayableCards(
 	hand: Card[],
-	playedCard: IRegularCard,
+	playedCard: Card,
 	trumpSuit: Suit | null
 ) {
+	if (playedCard.type === 'joker') {
+		return hand.map((card) => ({ ...card, playable: true }))
+	}
+
 	const regularCards = hand.filter(
 		(card) => card.type === 'regular'
 	) as IRegularCard[]

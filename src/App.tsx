@@ -33,9 +33,9 @@ const GameView = () => {
 			{components.hiddenHand && <HiddenHand position="top" numCards={5} />}
 			{components.hiddenHand && <HiddenHand position="left" numCards={5} />}
 			{components.hiddenHand && <HiddenHand position="right" numCards={5} />}
-			{components.cardHand && (
+			{/* {components.cardHand && (
 				<CardHand cards={hand} trumpSuit={'spades'} playedCard={playedCard} />
-			)}
+			)} */}
 			<DevWindow components={components} toggleComponent={toggleComponent} />
 		</div>
 	)
