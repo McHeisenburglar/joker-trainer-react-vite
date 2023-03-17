@@ -39,3 +39,7 @@ interface IJokerCard {
 }
 
 type Card = IRegularCard | IJokerCard
+
+type ICardTable = {
+	[player in PlayerPosition]: Card | null
+}

@@ -1,37 +1,26 @@
 import React from 'react'
 import Card from './Card'
+import { useGame } from '../../hooks/useGame'
 
 type CardTableProps = {
-	cards: {
-		top: IRegularCard | null
-		right: IRegularCard | null
-		bottom: IRegularCard | null
-		left: IRegularCard | null
-	}
+	cards?: ICardTable
 }
 
-const CardTable: React.FC<CardTableProps> = ({ cards }) => {
+const CardTable: React.FC<CardTableProps> = () => {
+	const cards = useGame().tableCards
 	return (
 		<div className="card-table">
 			<div className="card-table-item top">
-				{cards.top ? (
-					<Card rank={cards.top.rank} suit={cards.top.suit} />
-				) : null}
+				{cards[0] ? <Card card={cards[0]} /> : null}
 			</div>
 			<div className="card-table-item right">
-				{cards.right ? (
-					<Card rank={cards.right.rank} suit={cards.right.suit} />
-				) : null}
+				{cards[1] ? <Card card={cards[1]} /> : null}
 			</div>
 			<div className="card-table-item bottom">
-				{cards.bottom ? (
-					<Card rank={cards.bottom.rank} suit={cards.bottom.suit} />
-				) : null}
+				{cards[2] ? <Card card={cards[2]} /> : null}
 			</div>
 			<div className="card-table-item left">
-				{cards.left ? (
-					<Card rank={cards.left.rank} suit={cards.left.suit} />
-				) : null}
+				{cards[3] ? <Card card={cards[3]} /> : null}
 			</div>
 		</div>
 	)

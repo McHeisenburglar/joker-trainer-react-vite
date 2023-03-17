@@ -5,10 +5,16 @@ import { JokerIcon } from '../Card'
 type Props = {
 	card: Card
 	playable?: boolean
+	disabled?: boolean
 	onClickCallback?: (rank: string, suit: string) => void
 }
 
-const Card: React.FC<Props> = ({ card, playable, onClickCallback }) => {
+const Card: React.FC<Props> = ({
+	card,
+	playable,
+	disabled,
+	onClickCallback,
+}) => {
 	if (card.type === 'regular') {
 		const { suit, rank } = card as IRegularCard
 		const handleClick = () => {
@@ -24,9 +30,9 @@ const Card: React.FC<Props> = ({ card, playable, onClickCallback }) => {
 
 		return (
 			<div
-				className={`card ${playable ? 'playable' : 'disabled'} ${
+				className={`card ${playable ? 'playable' : ''} ${
 					isRed ? 'red' : 'black'
-				}`}
+				} ${disabled ? 'disabled' : ''}`}
 				onClick={handleClick}
 			>
 				<div className="card-content top-left">

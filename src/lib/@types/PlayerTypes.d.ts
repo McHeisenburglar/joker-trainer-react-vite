@@ -1,12 +1,12 @@
 // export {}
 
-// const PLAYER_POSITIONS = [0, 1, 2, 3] as const
+const PLAYER_POSITIONS = [0, 1, 2, 3] as const
 
 // declare namespace Constants {
 // 	const PLAYER_POSITIONS: [0, 1, 2, 3]
 // }
 
-type PlayerPosition = typeof Constants.PLAYER_POSITIONS[number]
+type PlayerPosition = typeof PLAYER_POSITIONS[number]
 
 type PlayerInfo = {
 	name: string

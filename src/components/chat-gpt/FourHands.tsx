@@ -3,6 +3,7 @@ import { Deck as CardDeck } from '../../lib/game-logic/card/CardDeck'
 import { getRandomCards } from '../../lib/helpers/random'
 import Card from './Card'
 import CardHand from './CardHand'
+import CardTable from './CardTable'
 
 class CardsInHand {
 	private _cards: Card[]
@@ -59,6 +60,7 @@ const FourPlayerCardGame = () => {
 					playedCard={playedCard}
 				/>
 			))}
+			<CardTable></CardTable>
 		</div>
 	)
 }
