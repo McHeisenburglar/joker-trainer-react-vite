@@ -45,7 +45,7 @@ const GameView = () => {
 
 import FourPlayerCardGame from './components/chat-gpt/FourHands'
 import SuitCard from './components/chat-gpt/SuitCard'
-import CardRow from './components/chat-gpt/CardRow'
+import SelectableCardRow from './components/chat-gpt/CardRow'
 import SuitRow from './components/chat-gpt/SuitRow'
 import CardGrid from './components/chat-gpt/CardGrid'
 import { Deck } from './lib/game-logic/card/CardDeck'

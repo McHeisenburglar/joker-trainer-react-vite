@@ -43,3 +43,7 @@ type Card = IRegularCard | IJokerCard
 type ICardTable = {
 	[player in PlayerPosition]: Card | null
 }
+
+type SelectableCard = IRegularCard & {
+	selected: boolean
+}

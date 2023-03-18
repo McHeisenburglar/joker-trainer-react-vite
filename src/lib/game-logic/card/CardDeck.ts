@@ -51,4 +51,18 @@ export class Deck {
 	get cards(): Card[] {
 		return this._cards
 	}
+
+	static selectableCards(): SelectableCard[] {
+		const deck = new Deck()
+		const regularCards = deck.cards.filter(
+			(card) => card.type === 'regular'
+		) as IRegularCard[]
+		const selectableCards = regularCards.map((card) => {
+			return {
+				...card,
+				selected: true,
+			}
+		})
+		return selectableCards
+	}
 }
