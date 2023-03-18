@@ -16,7 +16,7 @@ type SelectableCard = IRegularCard & {
 const CardRow: React.FC<CardRowProps> = ({ suit, suitOnly }) => {
 	const [selectedCount, setSelectedCount] = useState(0)
 
-	const getCardsInSuit: () => SelectableCard[] = () => {
+	const getCardsInSuit: (suit: Suit) => SelectableCard[] = () => {
 		const deck = new Deck()
 		const regularCards = deck.cards.filter(
 			(card) => card.type === 'regular'
@@ -33,7 +33,7 @@ const CardRow: React.FC<CardRowProps> = ({ suit, suitOnly }) => {
 		return suitCards
 	}
 
-	const [selectedCards, setSelectedCards] = useState(getCardsInSuit())
+	const [selectedCards, setSelectedCards] = useState(getCardsInSuit(suit))
 
 	const toggleCard = (card: SelectableCard) => {
 		const newCard = { ...card, selected: !card.selected }

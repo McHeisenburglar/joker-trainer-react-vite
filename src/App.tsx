@@ -48,23 +48,74 @@ import SuitCard from './components/chat-gpt/SuitCard'
 import CardRow from './components/chat-gpt/CardRow'
 import SuitRow from './components/chat-gpt/SuitRow'
 import CardGrid from './components/chat-gpt/CardGrid'
+import { Deck } from './lib/game-logic/card/CardDeck'
 
 function App() {
 	return (
 		<div>
-			<div className="center-content full-screen">
-				<div className="card-grid-game">
-					<CardGrid />
-					<div className="button-bar">
-						<button>Clear all</button>
-						<button>Select all</button>
-						<button>Start Game</button>
-					</div>
+			<CardRowGame />
+		</div>
+	)
+	// return <FourPlayerCardGame />
+}
+
+function CardRowGame() {
+	type SelectableCard = IRegularCard & {
+		selected: boolean
+	}
+	const getCardsInSuit: (suit: Suit) => SelectableCard[] = (suit: Suit) => {
+		const deck = new Deck()
+		const regularCards = deck.cards.filter(
+			(card) => card.type === 'regular'
+		) as IRegularCard[]
+		const suitCards = regularCards
+			.filter((card) => card.suit === suit)
+			.reverse()
+			.map((card) => {
+				return {
+					...card,
+					selected: true,
+				}
+			})
+		return suitCards
+	}
+
+	const [selectedCards, setSelectedCards] = useState({
+		hearts: getCardsInSuit('hearts'),
+		diamonds: getCardsInSuit('diamonds'),
+		clubs: getCardsInSuit('clubs'),
+		spades: getCardsInSuit('spades'),
+	})
+
+	const handleClearAll = () => {
+		console.log('hello')
+		const suits = ['hearts', 'diamonds', 'clubs', 'spades'] as Suit[]
+		const newSelectedCards = {} as CardMap<Suit, SelectableCard[]>
+		suits.forEach((suit) => {
+			newSelectedCards[suit] = selectedCards[suit].map((card) => {
+				console.log(card)
+				return {
+					...card,
+					selected: false,
+				}
+			})
+		})
+		console.log('then here')
+		setSelectedCards(newSelectedCards)
+	}
+
+	return (
+		<div className="center-content full-screen">
+			<div className="card-grid-game">
+				<CardGrid selectedCards={selectedCards} />
+				<div className="button-bar">
+					<button onClick={handleClearAll}>Clear all</button>
+					<button>Select all</button>
+					<button>Start Game</button>
 				</div>
 			</div>
 		</div>
 	)
-	// return <FourPlayerCardGame />
 }
 
 export default App
