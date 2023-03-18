@@ -105,6 +105,16 @@ $card-table-distance: 100px;
 	font-weight: 900;
 }
 
+/* Suit Card */
+.suit-card .card-content {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 4rem;
+}
+
 /* Card Hand */
 
 .card-hand {

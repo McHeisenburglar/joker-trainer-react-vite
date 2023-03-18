@@ -44,9 +44,18 @@ const GameView = () => {
 // export default GameView
 
 import FourPlayerCardGame from './components/chat-gpt/FourHands'
+import SuitCard from './components/chat-gpt/SuitCard'
 
 function App() {
-	return <FourPlayerCardGame />
+	return (
+		<div>
+			<SuitCard suit="hearts"></SuitCard>
+			<SuitCard suit="spades"></SuitCard>
+			<SuitCard suit="clubs"></SuitCard>
+			<SuitCard suit="diamonds"></SuitCard>
+		</div>
+	)
+	// return <FourPlayerCardGame />
 }
 
 export default App
