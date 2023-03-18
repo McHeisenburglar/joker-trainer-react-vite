@@ -3,6 +3,20 @@ $dark-red: #b71820;
 $bright-red: #dc333e;
 $card-table-distance: 100px;
 
+/* Layout */
+
+.full-screen {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+}
+
+.center-content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 /* Card */
 
 ul {
@@ -298,15 +312,88 @@ ul.horizontal-list {
 
 /* Card Row */
 
+.card-row-grid {
+	.card-row {
+		margin-bottom: 8px;
+	}
+}
+
+.card-row-list {
+	> .card-row-item + .card-row-item {
+		margin-left: 4px;
+	}
+}
+
 .card-row-item {
 	&.selected {
+		transform: scale(0.9);
 		.card {
 			background: white;
 		}
 	}
 	&:not(.selected) {
+		transform: scale(0.8);
 		.card {
-			background: #ddd;
+			background: #c2c3c7;
+		}
+		.card-content .rank,
+		.card-content .suit {
+			color: #989a9b;
+		}
+	}
+}
+
+.card-row-item.selectable {
+	cursor: pointer;
+	&,
+	.card,
+	.card-content .rank,
+	.card-content .suit,
+	&:hover .card,
+	&:hover .card-content .rank,
+	&:hover .card-content .suit {
+		transition: all 0.15s ease-out;
+	}
+	&:hover {
+		.card {
+			background: white;
+			transform: translateY(-2px);
+		}
+	}
+}
+
+.card-row-item.none-selected {
+	.suit-card {
+		.card-content p {
+			position: relative;
+			color: #aaa;
+			&::after {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 4px;
+				height: 80%;
+				background: #777;
+				transform: translate(-50%, -50%) rotate(-45deg);
+				transform-origin: center;
+			}
+		}
+	}
+}
+
+.card-grid-game {
+	padding: 16px;
+	border-radius: 8px;
+	background: #303038;
+	// display: flex;
+	// flex-direction: column;
+	.button-bar {
+		width: 100%;
+		display: flex;
+		justify-content: flex-end;
+		> button + button {
+			margin-left: 8px;
 		}
 	}
 }

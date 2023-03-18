@@ -9,28 +9,41 @@ interface CardRowProps {
 	suitOnly?: boolean
 }
 
+type SelectableCard = IRegularCard & {
+	selected: boolean
+}
+
 const CardRow: React.FC<CardRowProps> = ({ suit, suitOnly }) => {
 	const [selectedCount, setSelectedCount] = useState(0)
 
-	const handleClick = (index: number) => {
-		setSelectedCount(index + 1)
-	}
-
-	const cards = useMemo(() => {
+	const getCardsInSuit: () => SelectableCard[] = () => {
 		const deck = new Deck()
 		const regularCards = deck.cards.filter(
 			(card) => card.type === 'regular'
 		) as IRegularCard[]
 		const suitCards = regularCards
 			.filter((card) => card.suit === suit)
+			.reverse()
 			.map((card) => {
 				return {
 					...card,
-					selected: false,
+					selected: true,
 				}
 			})
 		return suitCards
-	}, [])
+	}
+
+	const [selectedCards, setSelectedCards] = useState(getCardsInSuit())
+
+	const toggleCard = (card: SelectableCard) => {
+		const newCard = { ...card, selected: !card.selected }
+		setSelectedCards((prev) => {
+			const newCards = [...prev]
+			const index = newCards.findIndex((c) => c.rank === card.rank)
+			newCards[index] = newCard
+			return newCards
+		})
+	}
 
 	return (
 		<div className="card-row">
@@ -43,13 +56,13 @@ const CardRow: React.FC<CardRowProps> = ({ suit, suitOnly }) => {
 				</div>
 			)}
 			<ul className="card-row-list horizontal-list">
-				{cards.map((card, index) => (
+				{selectedCards.map((card, index) => (
 					<li
 						key={index}
-						className={`card-row-item ${
-							index < selectedCount ? 'selected' : ''
+						className={`card-row-item selectable ${
+							card.selected ? 'selected' : ''
 						}`}
-						onClick={() => setSelectedCount(index + 1)}
+						onClick={() => toggleCard(card)}
 					>
 						<Card card={card} />
 					</li>

@@ -46,18 +46,22 @@ const GameView = () => {
 import FourPlayerCardGame from './components/chat-gpt/FourHands'
 import SuitCard from './components/chat-gpt/SuitCard'
 import CardRow from './components/chat-gpt/CardRow'
+import SuitRow from './components/chat-gpt/SuitRow'
+import CardGrid from './components/chat-gpt/CardGrid'
 
 function App() {
 	return (
 		<div>
-			<CardRow suit="hearts" />
-			<CardRow suit="spades" />
-			<CardRow suit="clubs" />
-			<CardRow suit="diamonds" />
-			{/* <SuitCard suit="hearts"></SuitCard>
-			<SuitCard suit="spades"></SuitCard>
-			<SuitCard suit="clubs"></SuitCard>
-			<SuitCard suit="diamonds"></SuitCard> */}
+			<div className="center-content full-screen">
+				<div className="card-grid-game">
+					<CardGrid />
+					<div className="button-bar">
+						<button>Clear all</button>
+						<button>Select all</button>
+						<button>Start Game</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	)
 	// return <FourPlayerCardGame />
