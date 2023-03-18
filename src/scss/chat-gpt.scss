@@ -5,6 +5,18 @@ $card-table-distance: 100px;
 
 /* Card */
 
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul.horizontal-list {
+	li {
+		display: inline-block;
+	}
+}
+
 .card {
 	display: inline-block;
 	width: 100px;
@@ -282,4 +294,19 @@ $card-table-distance: 100px;
 
 .card-table-container > * {
 	margin: 10px;
+}
+
+/* Card Row */
+
+.card-row-item {
+	&.selected {
+		.card {
+			background: white;
+		}
+	}
+	&:not(.selected) {
+		.card {
+			background: #ddd;
+		}
+	}
 }
