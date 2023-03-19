@@ -58,7 +58,7 @@ const Card: React.FC<Props> = ({
 			<div
 				className={`card card-size card-face card-joker ${
 					playable ? 'playable' : ''
-				} ${disabled ? 'disabled' : ''}${color}`}
+				} ${disabled ? 'disabled' : ''} ${color}`}
 				onClick={handleClick}
 			>
 				<div className="card-content top-left">

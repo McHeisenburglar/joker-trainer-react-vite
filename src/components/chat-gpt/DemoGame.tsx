@@ -171,12 +171,11 @@ const DemoGame: React.FC = () => {
 			<DevWindow position="bottom-left">
 				{hands.map((hand, index) => {
 					return (
-						<div className="player-hand-row tiny">
+						<div className="player-hand-row tiny" key={index}>
 							<span className={`${index === currentTurn ? 'highlight' : ''}`}>
 								{index}
 							</span>
 							<CardHand
-								key={index}
 								cards={hand.cards}
 								myTurn={currentTurn === index}
 								trumpSuit={trumpSuit}

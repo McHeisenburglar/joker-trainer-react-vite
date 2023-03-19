@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { CSSTransition } from 'react-transition-group'
 import Card from './Card'
-import { useGame } from '../../hooks/useGame'
-import { GameContext } from '../../state/gameContext'
 import CardSlot from './CardSlot'
 
 type CardTableProps = {
@@ -9,8 +8,6 @@ type CardTableProps = {
 }
 
 const CardTable: React.FC<CardTableProps> = ({ cards }) => {
-	// const { tableCards } = React.useContext(GameContext).state
-	// const cards = tableCards
 	return (
 		<div className="card-table">
 			<div className={`card-table-item top ${!cards[0] ? 'under' : ''}`}>

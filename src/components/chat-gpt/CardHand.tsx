@@ -27,10 +27,6 @@ const CardHand: React.FC<CardHandProps> = ({
 		? getPlayableCards(sortedCards, playedCard, trumpSuit)
 		: allPlayableCards(sortedCards)
 
-	useEffect(() => {
-		console.log('new played card', playedCard)
-	}, [playedCard])
-
 	const handleCardClick = (card: Card) => {
 		onCardClick(card)
 	}
@@ -47,7 +43,7 @@ const CardHand: React.FC<CardHandProps> = ({
 							onClickCallback={() => handleCardClick(card)}
 						/>
 					) : (
-						<Card card={card} />
+						<Card card={card} disabled={true} />
 					)}
 				</li>
 			))}
