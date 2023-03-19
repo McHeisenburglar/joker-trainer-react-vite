@@ -31,16 +31,22 @@ ul.horizontal-list {
 	}
 }
 
-.card {
+.card-size {
 	display: inline-block;
 	width: 100px;
 	height: 150px;
-	// padding: 10px;
-	// margin: 10px;
 	border-radius: 10px;
+}
+
+.card.card-face {
 	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 	background-color: white;
 	position: relative;
+}
+
+.card-slot {
+	background-color: rgba(0, 0, 0, 0.215);
+	z-index: -1;
 }
 
 .card-content {
@@ -197,11 +203,16 @@ ul.horizontal-list {
 	pointer-events: none;
 
 	& > div {
+		pointer-events: all;
 		position: absolute;
 		top: 50%;
 		left: 50%;
 		transform-origin: center center;
 		transform-style: preserve-3d;
+	}
+
+	.card-table-item.under {
+		z-index: -1;
 	}
 }
 

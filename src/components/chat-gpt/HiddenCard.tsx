@@ -11,7 +11,7 @@ const HiddenCard: React.FC<HiddenCardProps> = ({ onClick }) => {
 		}
 	}
 
-	return <div className="card hidden" onClick={handleClick} />
+	return <div className="card-size hidden" onClick={handleClick} />
 }
 
 export default HiddenCard

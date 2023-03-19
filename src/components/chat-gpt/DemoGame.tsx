@@ -14,10 +14,10 @@ const DemoGame: React.FC = () => {
 	const [deck, setDeck] = useState<Deck>(new Deck())
 	useEffect(() => {
 		// const deck = new Deck()
-		// deck.shuffle()
-		// const shuffledDeck = deck.shuffle()
-		// setDeck(shuffledDeck)
-		playNextCard()
+		deck.shuffle()
+		const shuffledDeck = deck.shuffle()
+		setDeck(shuffledDeck)
+		// playNextCard()
 	}, [])
 	const [currentTurn, setCurrentTurn] = useState<PlayerPosition>(0)
 	const [cardTable, setCardTable] = useState<ICardTable>({
@@ -61,7 +61,7 @@ const DemoGame: React.FC = () => {
 	return (
 		<div>
 			<CardTable cards={cardTable} />
-			{deck && <CardRow cards={deck.cards} />}
+			{/* {deck && <CardRow cards={deck.cards} />} */}
 			<DevWindow>
 				<button onClick={playNextCard}>Play Next Card</button>
 			</DevWindow>

@@ -30,7 +30,7 @@ const Card: React.FC<Props> = ({
 
 		return (
 			<div
-				className={`card ${playable ? 'playable' : ''} ${
+				className={`card card-size card-face ${playable ? 'playable' : ''} ${
 					isRed ? 'red' : 'black'
 				} ${disabled ? 'disabled' : ''}`}
 				onClick={handleClick}
@@ -56,9 +56,9 @@ const Card: React.FC<Props> = ({
 		}
 		return (
 			<div
-				className={`card card-joker ${playable ? 'playable' : ''} ${
-					disabled ? 'disabled' : ''
-				}${color}`}
+				className={`card card-size card-face card-joker ${
+					playable ? 'playable' : ''
+				} ${disabled ? 'disabled' : ''}${color}`}
 				onClick={handleClick}
 			>
 				<div className="card-content top-left">
