@@ -1,33 +1,102 @@
-.my-node.enter {
-	// .card {
-	opacity: 0;
-	// }
-}
-.my-node.enter-active {
-	// .card {
-	opacity: 1;
-	transition: opacity 1000ms;
-	// }
+$card-table-distance: 100px;
+
+$transform-all: translate(-50%, -50%);
+
+$card-timing-function: cubic-bezier(0.16, 1.23, 0.2, 0.98);
+$transition: all 700ms $card-timing-function;
+
+@mixin card-transform($position) {
+	$entrance-distance: 150%;
+	$rotation-degrees: 0deg;
+
+	$transform-scale: scale(1.4);
+	// $transform-direction: translate(100px);
+	// $transform-origin: translate($entrance-distance);
+
+	$transform-direction: translateY(-$card-table-distance);
+	$transform-origin: translateY(-$entrance-distance);
+
+	@if $position == top {
+		$transform-direction: translateY(-$card-table-distance);
+		// $transform-origin: translateY(-$entrance-distance);
+		$rotation-degrees: 0deg;
+	} @else if $position == right {
+		$transform-direction: translateX($card-table-distance);
+		// $transform-origin: translateX($entrance-distance);
+		$rotation-degrees: 90deg;
+	} @else if $position == bottom {
+		$transform-direction: translateY($card-table-distance);
+		// $transform-origin: translateY($entrance-distance);
+		$rotation-degrees: 180deg;
+	} @else if $position == left {
+		$transform-direction: translateX(-$card-table-distance);
+		// $transform-origin: translateY(-$entrance-distance);
+		$rotation-degrees: -90deg;
+	} @else {
+		@error "Unknown direction #{$direction}.";
+	}
+
+	$transform-rotate: rotate($rotation-degrees);
+
+	.#{$position} {
+		.animated-card.enter {
+			opacity: 0;
+			transform: $transform-all $transform-direction $transform-rotate
+				$transform-origin $transform-scale;
+		}
+		.animated-card.enter-active {
+			transition: $transition;
+
+			opacity: 1;
+			transform: $transform-all $transform-direction $transform-rotate;
+		}
+		.animated-card.enter {
+			opacity: 1;
+		}
+	}
 }
 
-.my-node.enter-done {
-	opacity: 1;
-}
+@include card-transform(top);
+@include card-transform(right);
+@include card-transform(bottom);
+@include card-transform(left);
 
-.my-node.exit {
-	// .card {
+// Enter animation
+// .top {
+// 	.animated-card.enter {
+// 		// .card {
+// 		perspective: 200px;
+// 		transform: translate(-50%, -50%) translateY(-100px) translateY(-150%)
+// 			scale(1.3);
+// 		// }
+// 	}
+// 	.animated-card.enter-active {
+// 		// .card {
+// 		opacity: 1;
+// 		transform: translate(-50%, -50%) translateY(-100px) translateY(0);
+// 		transition: $transition;
+// 		transition-timing-function: $card-timing-function;
+
+// 		// }
+// 	}
+
+// 	.animated-card.enter-done {
+// 		opacity: 1;
+// 	}
+// }
+
+// Exit animation
+.animated-card.exit {
+	z-index: -1;
 	opacity: 1;
 	position: absolute;
-	// }
 }
-.my-node.exit-active {
-	// .card {
+.animated-card.exit-active {
 	opacity: 0;
-	transition: opacity 1000ms;
+	transition: all 200ms;
 	position: absolute;
-	// }
 }
 
-.my-node.exit-done {
+.animated-card.exit-done {
 	opacity: 0;
 }

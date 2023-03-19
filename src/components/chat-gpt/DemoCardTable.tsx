@@ -63,6 +63,7 @@ const DemoCardTable: React.FC = () => {
 					const pos = index as PlayerPosition
 					return <button onClick={() => playRandomCard(pos)}>{position}</button>
 				})}
+				<button onClick={clearTable}>Clear table</button>
 			</DevWindow>
 		</div>
 	)

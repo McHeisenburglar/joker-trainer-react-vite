@@ -35,7 +35,7 @@ const CardTable: React.FC<CardTableProps> = ({ cards }) => {
 								key={JSON.stringify(card)}
 								in={!!card}
 								timeout={1000}
-								className="my-node"
+								className="animated-card"
 							>
 								{card ? <Card card={card} /> : <CardSlot />}
 							</CSSTransition>
