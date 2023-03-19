@@ -13,6 +13,7 @@ import CardRow from './CardRow'
 import DevWindow from './DevWindow'
 import CardHand from './CardHand'
 import { getRandomElement } from '../../lib/helpers/random'
+import { determineWinner } from '../../lib/game-logic/round/DetermineWinner'
 
 const blankTable = () => {
 	return {
@@ -115,11 +116,14 @@ const DemoGame: React.FC = () => {
 
 	const nextMove = () => {
 		if (tableIsFull()) {
+			const cardTableArray = Object.values(cardTable) as Card[]
+			const winner = determineWinner(cardTableArray) as PlayerPosition
+			setPreviousWinner(winner)
+			setCurrentTurn(winner)
 			clearTable()
 		} else {
 			playerPlaysTurn()
 			moveTurn()
-			// playNextCard()
 		}
 	}
 
