@@ -10,7 +10,11 @@ const SuitCard: React.FC<ISuitCardProps> = ({ suit }) => {
 	const isRed = suit === 'hearts' || suit === 'diamonds'
 
 	return (
-		<div className={`card suit-card ${isRed ? 'red' : 'black'}`}>
+		<div
+			className={`card-size card-face card suit-card ${
+				isRed ? 'red' : 'black'
+			}`}
+		>
 			<div className="card-content">
 				<p className="suit">{suitChar}</p>
 			</div>

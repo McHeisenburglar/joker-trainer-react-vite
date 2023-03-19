@@ -9,17 +9,17 @@ import Card from './Card'
 
 type CardHandProps = {
 	cards: Card[]
-	playedCard?: Card
+	playedCard?: Card | null
 	trumpSuit: Suit | null
-	playerPos: PlayerPosition
-	onCardClick: (card: Card, playerPos: PlayerPosition) => void
+	myTurn: boolean
+	onCardClick: (card: Card) => void
 }
 
 const CardHand: React.FC<CardHandProps> = ({
 	cards,
 	playedCard,
 	trumpSuit,
-	playerPos,
+	myTurn,
 	onCardClick,
 }) => {
 	const sortedCards = sortCards(cards)
@@ -27,20 +27,16 @@ const CardHand: React.FC<CardHandProps> = ({
 		? getPlayableCards(sortedCards, playedCard, trumpSuit)
 		: allPlayableCards(sortedCards)
 
-	const { state } = useGame()
-	const myTurn = state.currentPlayer === playerPos
-
 	useEffect(() => {
 		console.log('new played card', playedCard)
 	}, [playedCard])
 
 	const handleCardClick = (card: Card) => {
-		onCardClick(card, playerPos)
+		onCardClick(card)
 	}
 
 	return (
 		<ul className="card-hand shown">
-			{playerPos}
 			{playableCards.map((card, index) => (
 				<li key={index} className="card-hand-item">
 					{myTurn ? (
