@@ -105,7 +105,7 @@ const DemoGame: React.FC = () => {
 	}
 
 	const getRandomCardForPlayer = (player: PlayerPosition) => {
-		const hand = hands[currentTurn]
+		const hand = hands[player]
 		const playableCards = getPlayableCards(
 			hand.cards,
 			playedCard(),
@@ -124,7 +124,7 @@ const DemoGame: React.FC = () => {
 			}
 		})
 		const newHands = [...hands]
-		newHands[currentTurn] = newHand
+		newHands[player] = newHand
 		setHands(newHands)
 	}
 
