@@ -29,7 +29,7 @@ function App() {
 	return (
 		<div>
 			<DemoCardTable />
-			<CardFan />
+			{/* <CardFan /> */}
 			{/* <DemoGame /> */}
 			{/* <CardRowGame /> */}
 		</div>

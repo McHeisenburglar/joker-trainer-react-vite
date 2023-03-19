@@ -7,11 +7,11 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import DevWindow from './DevWindow'
 import { isSameCard } from '../../lib/helpers/cardHelpers'
 
-// interface CardFanProps {
-// 	cards: Card[]
-// }
+interface CardFanProps {
+	onCardClick?: (card: Card) => void
+}
 
-const CardFan: React.FC = () => {
+const CardFan: React.FC<CardFanProps> = ({ onCardClick }) => {
 	const [isSpreading, setIsSpreading] = React.useState(true)
 	const cardsRef = useRef(new Deck().shuffle().deal(10))
 	const nodeRef = useRef(null)
@@ -32,7 +32,10 @@ const CardFan: React.FC = () => {
 	}
 
 	const handleCardClick = (card: Card) => {
-		console.log('hello', card)
+		if (onCardClick) {
+			console.log('hello')
+			onCardClick(card)
+		}
 		const newCards = cards.filter((c) => !isSameCard(c, card))
 		cardsRef.current = newCards
 		setCards(cardsRef.current)

@@ -3,6 +3,7 @@ import { Deck } from '../../lib/game-logic/card/CardDeck'
 import { getRandomElement } from '../../lib/helpers/random'
 import CardTable from './CardTable'
 import DevWindow from './DevWindow'
+import CardFan from './CardFan'
 
 const blankTable = () => {
 	return {
@@ -54,17 +55,26 @@ const DemoCardTable: React.FC = () => {
 		setCardTable(blankTable())
 	}
 
+	const handleCardClick = (card: Card) => {
+		playCardOnTable(card, 2)
+	}
+
 	return (
 		<div className="demo-card-table">
-			<CardTable cards={cardTable} />
+			<CardTable cards={cardTable} startingPlayer={0} />
 			<DevWindow position="bottom-left">
 				<button onClick={next}>Next</button>
 				{['top', 'right', 'bottom', 'left'].map((position, index) => {
 					const pos = index as PlayerPosition
-					return <button onClick={() => playRandomCard(pos)}>{position}</button>
+					return (
+						<button onClick={() => playRandomCard(pos)} key={position}>
+							{position}
+						</button>
+					)
 				})}
 				<button onClick={clearTable}>Clear table</button>
 			</DevWindow>
+			<CardFan onCardClick={handleCardClick} />
 		</div>
 	)
 }

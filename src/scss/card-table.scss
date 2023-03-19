@@ -9,7 +9,7 @@ $transition: all 700ms $card-timing-function;
 	$entrance-distance: 150%;
 	$rotation-degrees: 0deg;
 
-	$transform-scale: scale(1.4);
+	$transform-scale: scale(0.8);
 	// $transform-direction: translate(100px);
 	// $transform-origin: translate($entrance-distance);
 
@@ -41,8 +41,9 @@ $transition: all 700ms $card-timing-function;
 	.#{$position} {
 		.animated-card.enter {
 			opacity: 0;
+			perspective: 200px;
 			transform: $transform-all $transform-direction $transform-rotate
-				$transform-origin $transform-scale;
+				$transform-origin $transform-scale rotateX(80deg) translateZ(400px);
 		}
 		.animated-card.enter-active {
 			transition: $transition;
@@ -98,5 +99,20 @@ $transition: all 700ms $card-timing-function;
 }
 
 .animated-card.exit-done {
+	opacity: 0;
+}
+
+.animated-card.card-slot.exit {
+	z-index: -100;
+	opacity: 0;
+	position: absolute;
+}
+.animated-card.card-slot.exit-active {
+	opacity: 0;
+	transition: all 200ms;
+	position: absolute;
+}
+
+.animated-card.card-slot.exit-done {
 	opacity: 0;
 }
