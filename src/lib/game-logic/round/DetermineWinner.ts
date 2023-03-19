@@ -33,10 +33,8 @@ export function determineWinner(cards: Card[], trumpSuit?: Suit): number {
 
 		// Check if card is a Joker
 		if (card.type === 'joker') {
-			if (highestRank === -1 || cards[winnerIndex].type === 'regular') {
-				winnerIndex = i
-				highestRank = Infinity
-			}
+			winnerIndex = i
+			highestRank = highestRank + 100
 			continue
 		}
 
@@ -46,16 +44,13 @@ export function determineWinner(cards: Card[], trumpSuit?: Suit): number {
 		const isTrump = suit === trumpSuit
 
 		// Check if card is a higher rank in the played suit
-		if (suit === playedSuit && (cardValueOf(rank) > highestRank || !isTrump)) {
+		if (suit === playedSuit && cardValueOf(rank) > highestRank) {
 			winnerIndex = i
 			highestRank = cardValueOf(rank)
 		}
 
 		// Check if card is a higher rank in a trump suit
-		if (
-			isTrump &&
-			(cardValueOf(rank) > highestRank || playedSuit !== trumpSuit)
-		) {
+		if (isTrump && cardValueOf(rank) > highestRank) {
 			winnerIndex = i
 			highestRank = cardValueOf(rank)
 			playedSuit = trumpSuit!
