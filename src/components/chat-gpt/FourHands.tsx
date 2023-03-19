@@ -179,13 +179,13 @@ const FourPlayerCardGame = () => {
 							cards={hand.cards}
 							trumpSuit={trumpSuit}
 							playedCard={playedCard() || undefined}
-							playerPos={index as PlayerPosition}
-							onCardClick={handleClick}
+							myTurn={currentPlayer === index}
+							onCardClick={(card) => handleClick(card, index as PlayerPosition)}
 						/>
 					))}
 				</div>
 				<div className="card-table-container">
-					<CardTable></CardTable>
+					<CardTable cards={gameState.tableCards}></CardTable>
 				</div>
 			</div>
 		</GameContext.Provider>
