@@ -26,6 +26,11 @@ const CardFan: React.FC = () => {
 		setIsSpreading(!isSpreading)
 	}
 
+	const redeal = () => {
+		cardsRef.current = new Deck().shuffle().deal(10)
+		setCards(cardsRef.current)
+	}
+
 	const handleCardClick = (card: Card) => {
 		console.log('hello', card)
 		const newCards = cards.filter((c) => !isSameCard(c, card))
@@ -64,6 +69,7 @@ const CardFan: React.FC = () => {
 			</CSSTransition>
 			<DevWindow position="bottom-right">
 				<button onClick={toggle}>Spread: {JSON.stringify(isSpreading)}</button>
+				<button onClick={redeal}>Deal again</button>
 			</DevWindow>
 		</div>
 	)
