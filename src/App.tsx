@@ -22,11 +22,13 @@ import CardGrid from './components/chat-gpt/CardGrid'
 import { Deck } from './lib/game-logic/card/CardDeck'
 import CardRowGame from './components/chat-gpt/CardRowGame'
 import DemoGame from './components/chat-gpt/DemoGame'
+import CardFan from './components/chat-gpt/CardFan'
 
 function App() {
 	return (
 		<div>
-			<DemoGame />
+			<CardFan />
+			{/* <DemoGame /> */}
 			{/* <CardRowGame /> */}
 		</div>
 	)

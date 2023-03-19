@@ -1,0 +1,58 @@
+import '../../scss/card-fan.scss'
+import React, { useRef, useState, useEffect } from 'react'
+import { Deck } from '../../lib/game-logic/card/CardDeck'
+import Card from './Card'
+import HiddenCard from './HiddenCard'
+import { CSSTransition } from 'react-transition-group'
+import DevWindow from './DevWindow'
+
+// interface CardFanProps {
+// 	cards: Card[]
+// }
+
+const CardFan: React.FC = () => {
+	const [isSpreading, setIsSpreading] = React.useState(true)
+	const cardsRef = useRef(new Deck().shuffle().deal(10))
+	const nodeRef = useRef(null)
+
+	const [cards, setCards] = useState(cardsRef.current)
+
+	useEffect(() => {
+		setCards(cardsRef.current)
+	}, [])
+
+	const toggle = () => {
+		setIsSpreading(!isSpreading)
+	}
+
+	return (
+		<div className="card-fan-container">
+			<CSSTransition
+				in
+				appear
+				nodeRef={nodeRef}
+				timeout={1000}
+				onEntered={() => {
+					console.log('ayyy')
+					setIsSpreading(false)
+				}}
+				exit={false}
+			>
+				<div
+					ref={nodeRef}
+					className={`card-fan ${isSpreading ? 'spread' : 'closed'}`}
+				>
+					{cards.map((card, index) => (
+						/* <HiddenCard /> */
+						<Card card={card} key={index} />
+					))}
+				</div>
+			</CSSTransition>
+			<DevWindow position="bottom-right">
+				<button onClick={toggle}>Spread: {JSON.stringify(isSpreading)}</button>
+			</DevWindow>
+		</div>
+	)
+}
+
+export default CardFan

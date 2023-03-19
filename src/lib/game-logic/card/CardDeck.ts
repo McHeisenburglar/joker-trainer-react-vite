@@ -45,6 +45,14 @@ export class Deck {
 		return card
 	}
 
+	deal(number: number): Card[] {
+		const cards = []
+		for (let i = 0; i < number; i++) {
+			cards.push(this.pop())
+		}
+		return cards
+	}
+
 	isEmpty(): boolean {
 		return this._cards.length === 0
 	}
