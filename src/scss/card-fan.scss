@@ -6,7 +6,7 @@
 }
 
 @mixin fan($count, $angle) {
-	$offset: $angle / 2;
+	$offset: calc($angle / 2);
 	.card {
 		position: absolute;
 		cursor: pointer;
@@ -51,7 +51,7 @@
 	// }
 
 	@for $i from 1 through $count {
-		$increment: $angle / ($count + 1);
+		$increment: calc($angle / ($count + 1));
 		.card.card-#{$i}-in-fan {
 			transform: translate(-50%, -50%) rotate(-$offset + $increment * $i);
 		}
