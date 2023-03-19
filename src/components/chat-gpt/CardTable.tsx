@@ -1,5 +1,10 @@
+import '../../scss/card-table.scss'
 import React, { useEffect } from 'react'
-import { CSSTransition } from 'react-transition-group'
+import {
+	CSSTransition,
+	SwitchTransition,
+	TransitionGroup,
+} from 'react-transition-group'
 import Card from './Card'
 import CardSlot from './CardSlot'
 
@@ -14,13 +19,29 @@ const CardTable: React.FC<CardTableProps> = ({ cards }) => {
 			{positions.map((position, index) => {
 				const playerPos = index as PlayerPosition
 				const card = cards[playerPos]
+				const placeholder: Card = {
+					type: 'regular',
+					rank: 'ace',
+					suit: 'spades',
+				}
 				return (
 					<div
-						className={`card-table-item ${position} ${
-							!cards[playerPos] ? 'under' : ''
-						}`}
+						className={`card-table-item ${position} ${!card && 'under'}`}
+						key={position}
 					>
-						{card ? <Card card={card} /> : <CardSlot />}
+						{/* <SwitchTransition mode="out-in"> */}
+						<TransitionGroup>
+							<CSSTransition
+								key={JSON.stringify(card)}
+								in={!!card}
+								timeout={1000}
+								className="my-node"
+							>
+								{card ? <Card card={card} /> : <CardSlot />}
+							</CSSTransition>
+						</TransitionGroup>
+						{/* <CardSlot /> */}
+						{/* </SwitchTransition> */}
 					</div>
 				)
 			})}

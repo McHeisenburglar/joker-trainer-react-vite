@@ -210,7 +210,7 @@ ul.horizontal-list {
 	overflow: hidden;
 	pointer-events: none;
 
-	& > div {
+	.card-table-item {
 		pointer-events: all;
 		position: absolute;
 		top: 50%;
@@ -225,23 +225,39 @@ ul.horizontal-list {
 }
 
 .card-table-item.top {
-	transform: translate(-50%, -50%) translateY(-$card-table-distance)
-		rotate(0deg);
+	.card,
+	.card-slot {
+		position: absolute;
+		transform: translate(-50%, -50%) translateY(-$card-table-distance)
+			rotate(0deg);
+	}
 }
 
 .card-table-item.right {
-	transform: translate(-50%, -50%) translateX($card-table-distance)
-		rotate(90deg);
+	.card,
+	.card-slot {
+		position: absolute;
+		transform: translate(-50%, -50%) translateX($card-table-distance)
+			rotate(90deg);
+	}
 }
 
 .card-table-item.bottom {
-	transform: translate(-50%, -50%) translateY($card-table-distance)
-		rotate(180deg);
+	.card,
+	.card-slot {
+		position: absolute;
+		transform: translate(-50%, -50%) translateY($card-table-distance)
+			rotate(180deg);
+	}
 }
 
 .card-table-item.left {
-	transform: translate(-50%, -50%) translateX(-$card-table-distance)
-		rotate(-90deg);
+	.card,
+	.card-slot {
+		position: absolute;
+		transform: translate(-50%, -50%) translateX(-$card-table-distance)
+			rotate(-90deg);
+	}
 }
 
 /* Game View */

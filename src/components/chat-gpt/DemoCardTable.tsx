@@ -55,7 +55,7 @@ const DemoCardTable: React.FC = () => {
 	}
 
 	return (
-		<div>
+		<div className="demo-card-table">
 			<CardTable cards={cardTable} />
 			<DevWindow position="bottom-left">
 				<button onClick={next}>Next</button>
