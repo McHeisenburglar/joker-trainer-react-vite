@@ -319,8 +319,8 @@ ul.horizontal-list {
 }
 
 .card-row-list {
-	> .card-row-item + .card-row-item {
-		margin-left: 4px;
+	> .card-row-item {
+		margin-right: 4px;
 	}
 }
 
@@ -331,7 +331,7 @@ ul.horizontal-list {
 			background: white;
 		}
 	}
-	&:not(.selected) {
+	&.deselected {
 		transform: scale(0.8);
 		.card {
 			background: #c2c3c7;

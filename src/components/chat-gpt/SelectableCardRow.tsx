@@ -5,15 +5,26 @@ import Card from './Card'
 import { Deck } from '../../lib/game-logic/card/CardDeck'
 
 interface CardRowProps {
-	cards: Card[]
+	cards: SelectableCard[]
+	onClick: (card: SelectableCard) => void
 }
 
-const SelectableCardRow: React.FC<CardRowProps> = ({ cards }) => {
+type SelectableCard = IRegularCard & {
+	selected: boolean
+}
+
+const SelectableCardRow: React.FC<CardRowProps> = ({ cards, onClick }) => {
 	return (
 		<div className="card-row">
 			<ul className="card-row-list horizontal-list">
 				{cards.map((card, index) => (
-					<li key={index} className={`card-row-item`}>
+					<li
+						key={index}
+						className={`card-row-item selectable ${
+							card.selected ? 'selected' : 'deselected'
+						}`}
+						onClick={() => onClick(card)}
+					>
 						<Card card={card} />
 					</li>
 				))}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import SelectableCardRow from './CardRow'
+import SelectableCardRow from './SelectableCardRow'
 import { Deck } from '../../lib/game-logic/card/CardDeck'
 import { SUITS } from '../../lib/global/constants'
 
@@ -15,7 +15,7 @@ const isSameCard = (card1: Card, card2: Card) => {
 	}
 }
 
-const CardGrid: React.FC<CardGridProps> = () => {
+const CardGrid: React.FC = () => {
 	const [selectedCards, setSelectedCards] = useState(Deck.selectableCards())
 
 	const toggleCard = (card: SelectableCard) => {

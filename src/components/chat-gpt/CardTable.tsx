@@ -4,12 +4,12 @@ import { useGame } from '../../hooks/useGame'
 import { GameContext } from '../../state/gameContext'
 
 type CardTableProps = {
-	cards?: ICardTable
+	cards: ICardTable
 }
 
-const CardTable: React.FC<CardTableProps> = () => {
-	const { tableCards } = React.useContext(GameContext).state
-	const cards = tableCards
+const CardTable: React.FC<CardTableProps> = ({ cards }) => {
+	// const { tableCards } = React.useContext(GameContext).state
+	// const cards = tableCards
 	return (
 		<div className="card-table">
 			<div className="card-table-item top">
