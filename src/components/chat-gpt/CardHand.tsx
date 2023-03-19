@@ -40,7 +40,7 @@ const CardHand: React.FC<CardHandProps> = ({
 							card={card}
 							playable={card.playable}
 							disabled={!card.playable}
-							onClickCallback={() => handleCardClick(card)}
+							onClick={() => handleCardClick(card)}
 						/>
 					) : (
 						<Card card={card} disabled={true} />

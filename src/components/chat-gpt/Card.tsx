@@ -6,21 +6,16 @@ type Props = {
 	card: Card
 	playable?: boolean
 	disabled?: boolean
-	onClickCallback?: (card: Card) => void
+	onClick?: (card: Card) => void
 }
 
-const Card: React.FC<Props> = ({
-	card,
-	playable,
-	disabled,
-	onClickCallback,
-}) => {
+const Card: React.FC<Props> = ({ card, playable, disabled, onClick }) => {
 	if (card.type === 'regular') {
 		const { suit, rank } = card as IRegularCard
 
 		const handleClick = () => {
-			if (playable && onClickCallback) {
-				onClickCallback(card)
+			if (onClick) {
+				onClick(card)
 			}
 		}
 
@@ -50,8 +45,8 @@ const Card: React.FC<Props> = ({
 		const color = id === 'joker1' ? 'red' : 'black'
 
 		const handleClick = () => {
-			if (playable && onClickCallback) {
-				onClickCallback(card)
+			if (onClick) {
+				onClick(card)
 			}
 		}
 		return (

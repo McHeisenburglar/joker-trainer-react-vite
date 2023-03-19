@@ -18,6 +18,7 @@
 
 		transform-origin: center 250%;
 
+		transition-property: transform;
 		transition-duration: 0.8s;
 		transition-timing-function: cubic-bezier(0.07, 0.94, 0.18, 1.07);
 	}
@@ -32,10 +33,28 @@
 			border-radius: 8px;
 		}
 	}
+	@for $i from 1 through $count {
+		$increment: $angle / ($count + 1);
+		.card:nth-child(#{$i}) {
+			transform: translate(-50%, -50%) rotate(-$offset + $increment * $i);
+		}
+		.card:nth-child(#{$i}):hover {
+			transform: translate(-50%, -50%)
+				rotate(-$offset + $increment * $i)
+				scale(1.1);
+		}
+		.card:nth-child(#{$i}):active {
+			transform: translate(-50%, -50%)
+				rotate(-$offset + $increment * $i)
+				scale(1.2)
+				translateY(-30%);
+		}
+	}
 	&.spread .card {
 		animation: animate-pop 0.8s cubic-bezier(0.07, 0.94, 0.18, 1.07) forwards;
-		transition-duration: 0.8s;
-		transition-timing-function: cubic-bezier(0.07, 0.94, 0.18, 1.07);
+	}
+	&.spread {
+		pointer-events: none;
 	}
 	@keyframes animate-pop {
 		0% {
@@ -47,18 +66,17 @@
 			transition-timing-function: cubic-bezier(0.07, 0.94, 0.18, 1.07);
 		}
 	}
-	@for $i from 1 through $count {
-		$increment: $angle / ($count + 1);
-		.card:nth-child(#{$i}) {
-			transform: translate(-50%, -50%) rotate(-$offset + $increment * $i);
-		}
-		.card:nth-child(#{$i}):hover {
-			transform: translate(-50%, -50%)
-				rotate(-$offset + $increment * $i)
-				scale(1.1);
+}
+// .card-fan {
+// 	@include fan(10, 60deg);
+// }
+
+@mixin card-fan-list {
+	@for $i from 1 through 15 {
+		.card-fan.card-count-#{$i} {
+			@include fan($i, 60deg);
 		}
 	}
 }
-.card-fan {
-	@include fan(10, 60deg);
-}
+
+@include card-fan-list;

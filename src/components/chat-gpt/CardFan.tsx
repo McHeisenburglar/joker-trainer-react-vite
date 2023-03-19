@@ -5,6 +5,7 @@ import Card from './Card'
 import HiddenCard from './HiddenCard'
 import { CSSTransition } from 'react-transition-group'
 import DevWindow from './DevWindow'
+import { isSameCard } from '../../lib/helpers/cardHelpers'
 
 // interface CardFanProps {
 // 	cards: Card[]
@@ -25,26 +26,34 @@ const CardFan: React.FC = () => {
 		setIsSpreading(!isSpreading)
 	}
 
+	const handleCardClick = (card: Card) => {
+		console.log('hello', card)
+		const newCards = cards.filter((c) => !isSameCard(c, card))
+		cardsRef.current = newCards
+		setCards(cardsRef.current)
+	}
+
 	return (
 		<div className="card-fan-container">
 			<CSSTransition
 				in
 				appear
 				nodeRef={nodeRef}
-				timeout={1000}
+				timeout={800}
 				onEntered={() => {
-					console.log('ayyy')
 					setIsSpreading(false)
 				}}
 				exit={false}
 			>
 				<div
 					ref={nodeRef}
-					className={`card-fan ${isSpreading ? 'spread' : 'closed'}`}
+					className={`card-fan ${isSpreading ? 'spread' : ''} card-count-${
+						cards.length
+					}`}
 				>
 					{cards.map((card, index) => (
 						/* <HiddenCard /> */
-						<Card card={card} key={index} />
+						<Card card={card} key={index} onClick={handleCardClick} />
 					))}
 				</div>
 			</CSSTransition>
