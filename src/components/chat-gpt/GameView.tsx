@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { getRandomCards, getRandomCardTable } from '../../lib/helpers/random'
 import Card from './Card'
 import CardTable from './CardTable'
-import DevWindow from './DevTable'
+import DevTable from './DevTable'
 import HiddenHand from './HiddenHand'
 
 const GameView = () => {
@@ -29,7 +29,7 @@ const GameView = () => {
 			{/* {components.cardHand && (
 				<CardHand cards={hand} trumpSuit={'spades'} playedCard={playedCard} />
 			)} */}
-			<DevWindow components={components} toggleComponent={toggleComponent} />
+			<DevTable components={components} toggleComponent={toggleComponent} />
 		</div>
 	)
 }

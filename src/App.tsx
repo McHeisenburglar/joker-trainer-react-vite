@@ -8,7 +8,7 @@ import Card from './components/chat-gpt/Card'
 
 import HiddenHand from './components/chat-gpt/HiddenHand'
 import CardTable from './components/chat-gpt/CardTable'
-import DevWindow from './components/chat-gpt/DevTable'
+import DevTable from './components/chat-gpt/DevTable'
 
 import { getRandomCards, getRandomCardTable } from './lib/helpers/random'
 

@@ -9,7 +9,7 @@ interface DevWindowProps {
 
 // want the same component, but with const React.FC
 
-const DevWindow: React.FC<DevWindowProps> = (props) => {
+const DevTable: React.FC<DevWindowProps> = (props) => {
 	const { components, toggleComponent } = props
 
 	return (
@@ -43,4 +43,4 @@ const DevWindow: React.FC<DevWindowProps> = (props) => {
 	)
 }
 
-export default DevWindow
+export default DevTable

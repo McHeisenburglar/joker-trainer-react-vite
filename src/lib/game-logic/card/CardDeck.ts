@@ -30,8 +30,9 @@ export class Deck {
 		return deck
 	}
 
-	shuffle(): void {
+	shuffle(): Deck {
 		shuffleAlg(this._cards)
+		return this
 	}
 
 	reset(): void {
