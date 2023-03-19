@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { Deck } from '../../lib/game-logic/card/CardDeck'
 import Card from './Card'
 import HiddenCard from './HiddenCard'
-import { CSSTransition } from 'react-transition-group'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import DevWindow from './DevWindow'
 import { isSameCard } from '../../lib/helpers/cardHelpers'
 
@@ -53,7 +53,12 @@ const CardFan: React.FC = () => {
 				>
 					{cards.map((card, index) => (
 						/* <HiddenCard /> */
-						<Card card={card} key={index} onClick={handleCardClick} />
+						<Card
+							card={card}
+							key={JSON.stringify(card)}
+							onClick={handleCardClick}
+							className={`card-${index + 1}-in-fan`}
+						/>
 					))}
 				</div>
 			</CSSTransition>

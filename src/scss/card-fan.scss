@@ -33,21 +33,38 @@
 			border-radius: 8px;
 		}
 	}
+	// @for $i from 1 through $count {
+	// 	$increment: $angle / ($count + 1);
+	// 	.card:nth-child(#{$i}) {
+	// 		transform: translate(-50%, -50%) rotate(-$offset + $increment * $i);
+	// 	}
+	// 	.card:nth-child(#{$i}):hover {
+	// 		transform: translate(-50%, -50%)
+	// 			rotate(-$offset + $increment * $i)
+	// 			scale(1.1);
+	// 	}
+	// 	.card:nth-child(#{$i}):active {
+	// 		transform: translate(-50%, -50%)
+	// 			rotate(-$offset + $increment * $i)
+	// 			scale(1.2);
+	// 		// translateY(-30%);
+	// 	}
+	// }
+
 	@for $i from 1 through $count {
 		$increment: $angle / ($count + 1);
-		.card:nth-child(#{$i}) {
+		.card.card-#{$i}-in-fan {
 			transform: translate(-50%, -50%) rotate(-$offset + $increment * $i);
 		}
-		.card:nth-child(#{$i}):hover {
+		.card.card-#{$i}-in-fan:hover {
 			transform: translate(-50%, -50%)
 				rotate(-$offset + $increment * $i)
 				scale(1.1);
 		}
-		.card:nth-child(#{$i}):active {
+		.card.card-#{$i}-in-fan:active {
 			transform: translate(-50%, -50%)
 				rotate(-$offset + $increment * $i)
-				scale(1.2)
-				translateY(-30%);
+				scale(1.2);
 		}
 	}
 	&.spread .card {

@@ -7,9 +7,17 @@ type Props = {
 	playable?: boolean
 	disabled?: boolean
 	onClick?: (card: Card) => void
+	className?: string
+	ref?: React.Ref<HTMLDivElement>
 }
 
-const Card: React.FC<Props> = ({ card, playable, disabled, onClick }) => {
+const Card: React.FC<Props> = ({
+	card,
+	playable,
+	disabled,
+	onClick,
+	className,
+}) => {
 	if (card.type === 'regular') {
 		const { suit, rank } = card as IRegularCard
 
@@ -27,7 +35,7 @@ const Card: React.FC<Props> = ({ card, playable, disabled, onClick }) => {
 			<div
 				className={`card card-size card-face ${playable ? 'playable' : ''} ${
 					isRed ? 'red' : 'black'
-				} ${disabled ? 'disabled' : ''}`}
+				} ${disabled ? 'disabled' : ''} ${className || ''}`}
 				onClick={handleClick}
 			>
 				<div className="card-content top-left">
@@ -53,7 +61,7 @@ const Card: React.FC<Props> = ({ card, playable, disabled, onClick }) => {
 			<div
 				className={`card card-size card-face card-joker ${
 					playable ? 'playable' : ''
-				} ${disabled ? 'disabled' : ''} ${color}`}
+				} ${disabled ? 'disabled' : ''} ${color} ${className || ''}`}
 				onClick={handleClick}
 			>
 				<div className="card-content top-left">
