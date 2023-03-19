@@ -108,8 +108,8 @@ const DemoGame: React.FC = () => {
 		const hand = hands[currentTurn]
 		const playableCards = getPlayableCards(
 			hand.cards,
-			cardTable[previousWinner],
-			null
+			playedCard(),
+			trumpSuit
 		).filter((c) => c.playable)
 		const cardToPlay = getRandomElement<Card>(playableCards)
 		return cardToPlay
@@ -155,6 +155,9 @@ const DemoGame: React.FC = () => {
 		playCardOnTable(card)
 	}
 
+	const [isPlaying, setIsPlaying] = useState(false)
+	const autoPlay = () => {}
+
 	return (
 		<div>
 			{trumpSuit && (
@@ -190,6 +193,7 @@ const DemoGame: React.FC = () => {
 			{/* {deck && <CardRow cards={deck.cards} />} */}
 			<DevWindow position="top-right">
 				<button onClick={nextMove}>Play Next Card</button>
+				<button onClick={autoPlay}>Start auto-play</button>
 			</DevWindow>
 		</div>
 	)
