@@ -28,18 +28,33 @@ const DemoGame: React.FC = () => {
 	})
 	const [playedCard, setPlayedCard] = useState<Card | null>(null)
 
+	const tableIsFull = () => {
+		return Object.values(cardTable).every((card) => card !== null)
+	}
+
+	const blankTable = () => {
+		return {
+			0: null,
+			1: null,
+			2: null,
+			3: null,
+		}
+	}
+
 	const playNextCard = () => {
 		if (deck) {
-			const card = deck.pop()
-			const newCardTable = {
-				...cardTable,
-			}
-			newCardTable[currentTurn] = card
+			try {
+				const card = deck.pop()
+				const newCardTable = tableIsFull() ? blankTable() : { ...cardTable }
+				newCardTable[currentTurn] = card
 
-			const nextTurn = ((currentTurn + 1) % 4) as PlayerPosition
-			setCurrentTurn(nextTurn)
-			setDeck(deck)
-			setCardTable(newCardTable)
+				const nextTurn = ((currentTurn + 1) % 4) as PlayerPosition
+				setCurrentTurn(nextTurn)
+				setDeck(deck)
+				setCardTable(newCardTable)
+			} catch (e) {
+				return
+			}
 		}
 	}
 
