@@ -10,12 +10,22 @@ import {
 import CardRow from './CardRow'
 
 const DemoGame: React.FC = () => {
-	const [deck, setDeck] = useState<Deck>(new Deck())
+	const [deck, setDeck] = useState<Deck | null>(null)
 	useEffect(() => {
+		const deck = new Deck()
 		deck.shuffle()
 		setDeck(deck)
+
+		const card = deck.pop()
+		const newCardTable = {
+			...cardTable,
+		}
+		newCardTable[currentTurn] = card
+
+		setDeck(deck)
+		setCardTable(newCardTable)
 	}, [])
-	const [currentTurn, setCurrentTurn] = useState(0)
+	const [currentTurn, setCurrentTurn] = useState<PlayerPosition>(0)
 	const [cardTable, setCardTable] = useState<ICardTable>({
 		0: null,
 		1: null,
@@ -26,8 +36,8 @@ const DemoGame: React.FC = () => {
 
 	return (
 		<div>
-			{/* <CardTable cards={cardTable} /> */}
-			<CardRow cards={deck.cards} />
+			<CardTable cards={cardTable} />
+			{deck && <CardRow cards={deck.cards} />}
 		</div>
 	)
 }
