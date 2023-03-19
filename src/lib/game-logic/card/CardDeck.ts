@@ -45,7 +45,7 @@ export class Deck {
 		return card
 	}
 
-	is_empty(): boolean {
+	isEmpty(): boolean {
 		return this._cards.length === 0
 	}
 

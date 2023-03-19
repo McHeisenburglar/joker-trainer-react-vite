@@ -192,6 +192,12 @@ ul.horizontal-list {
 }
 
 /* Card Table */
+
+.card-table-container {
+	position: relative;
+	width: 100%;
+	height: 800px;
+}
 .card-table {
 	position: absolute;
 	top: 50%;
@@ -280,10 +286,13 @@ ul.horizontal-list {
 		justify-content: center;
 	}
 }
+.highlight {
+	color: green;
+}
 
 /* Dev Window */
 .dev-window {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	right: 0;
 	padding: 20px;

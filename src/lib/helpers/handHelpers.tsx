@@ -1,3 +1,26 @@
+import { isSameCard } from './cardHelpers'
+
+export class CardsInHand {
+	private _cards: Card[]
+	constructor() {
+		this._cards = []
+	}
+
+	public addCard(card: Card) {
+		this._cards.push(card)
+	}
+	public clear() {
+		this._cards = []
+	}
+
+	public get cards() {
+		return this._cards
+	}
+
+	public remove(card: Card) {
+		this._cards = this._cards.filter((c) => isSameCard(c, card))
+	}
+}
 export function sortCards(cards: Card[]): Card[] {
 	const regularCards = cards.filter(
 		(card) => card.type === 'regular'
@@ -44,11 +67,15 @@ export function sortCards(cards: Card[]): Card[] {
 	// Flatten the groups and return the sorted array
 	return [...jokerCards, ...groups.flat()]
 }
+
+type PlayableCard = Card & { playable: boolean }
+
 export function getPlayableCards(
 	hand: Card[],
-	playedCard: Card,
+	playedCard: Card | null,
 	trumpSuit: Suit | null
-) {
+): PlayableCard[] {
+	if (!playedCard) return allPlayableCards(hand)
 	if (playedCard.type === 'joker') {
 		return hand.map((card) => ({ ...card, playable: true }))
 	}
