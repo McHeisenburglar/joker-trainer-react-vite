@@ -8,20 +8,22 @@ type CardTableProps = {
 }
 
 const CardTable: React.FC<CardTableProps> = ({ cards }) => {
+	const positions = ['top', 'right', 'bottom', 'left']
 	return (
-		<div className="card-table">
-			<div className={`card-table-item top ${!cards[0] ? 'under' : ''}`}>
-				{cards[0] ? <Card card={cards[0]} /> : <CardSlot />}
-			</div>
-			<div className={`card-table-item right ${!cards[1] ? 'under' : ''}`}>
-				{cards[1] ? <Card card={cards[1]} /> : <CardSlot />}
-			</div>
-			<div className={`card-table-item bottom ${!cards[2] ? 'under' : ''}`}>
-				{cards[2] ? <Card card={cards[2]} /> : <CardSlot />}
-			</div>
-			<div className={`card-table-item left ${!cards[3] ? 'under' : ''}`}>
-				{cards[3] ? <Card card={cards[3]} /> : <CardSlot />}
-			</div>
+		<div className="card-table card-table-animated">
+			{positions.map((position, index) => {
+				const playerPos = index as PlayerPosition
+				const card = cards[playerPos]
+				return (
+					<div
+						className={`card-table-item ${position} ${
+							!cards[playerPos] ? 'under' : ''
+						}`}
+					>
+						{card ? <Card card={card} /> : <CardSlot />}
+					</div>
+				)
+			})}
 		</div>
 	)
 }
