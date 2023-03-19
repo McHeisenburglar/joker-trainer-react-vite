@@ -1,9 +1,8 @@
 .card-fan-container {
-	width: 400px;
-	height: 400px;
-	background: #444;
+	position: fixed;
+	bottom: 12em;
+	width: 100vw;
 	border-radius: 8px;
-	margin: 200px auto;
 }
 
 @mixin fan($count, $angle) {
@@ -18,7 +17,7 @@
 
 		transform-origin: center 250%;
 
-		transition-property: transform;
+		transition-property: transform opacity;
 		transition-duration: 0.8s;
 		transition-timing-function: cubic-bezier(0.07, 0.94, 0.18, 1.07);
 	}
@@ -68,7 +67,45 @@
 		}
 	}
 	&.spread .card {
-		animation: animate-pop 0.8s cubic-bezier(0.07, 0.94, 0.18, 1.07) forwards;
+		// animation: animate-pop 0.8s cubic-bezier(0.07, 0.94, 0.18, 1.07) 3s forwards;
+	}
+	@for $i from 1 through $count {
+		$delay: $i * 0.05s;
+		$duration: 0.25s + ($i * 0.07);
+		&.spread {
+			.card.card-#{$i}-in-fan {
+				// transform: translate(-50%, -50%) translateY(100%);
+				// transform: translate(-50%, 200%);
+				animation: animate-pop
+					// $duration
+					$duration
+					// cubic-bezier(0.07, 0.94, 0.5, 1.02)
+					cubic-bezier(0.07, 0.81, 0.05, 1)
+					// cubic-bezier(0.1, 0.64, 0.27, 1);
+					$delay
+					both;
+				// transform: translate(-50%, -50%) rotate(-$offset + $increment * $i);
+			}
+			// .card:nth-child(#{$count}) {
+			// 	// transform: translate(-50%, -50%) translateY(100%);
+			// 	// transform: translate(-50%, 200%);
+			// 	animation: animate-pop
+			// 		// $duration
+			// 		($duration + 0.5s)
+			// 		// cubic-bezier(0.07, 0.94, 0.3, 1.06)
+			// 		// cubic-bezier(0, 0.79, 0.1, 1.15)
+			// 		// cubic-bezier(0.07, 0.81, 0.05, 1.1)
+			// 		// cubic-bezier(0.07, 0.59, 0.39, 1.08)
+			// 		// cubic-bezier(0, 0.83, 0.39, 1.08)
+			// 		// cubic-bezier(0, 0.84, 0.07, 1.12)
+			// 		cubic-bezier(0.06, 0.84, 0.21, 1.1)
+			// 		// cubic-bezier(0.07, 0.81, 0.3, 1)
+			// 		// cubic-bezier(0.1, 0.64, 0.27, 1);
+			// 		($delay)
+			// 		both;
+			// 	// transform: translate(-50%, -50%) rotate(-$offset + $increment * $i);
+			// }
+		}
 	}
 	&.spread {
 		pointer-events: none;
@@ -76,14 +113,17 @@
 	@keyframes animate-pop {
 		0% {
 			opacity: 0;
-			transform: translate(-50%, -50%);
+			transform: translate(-50%, 200%);
+		}
+		10% {
+			opacity: 0;
 		}
 		100% {
-			transition-duration: 0.8s;
-			transition-timing-function: cubic-bezier(0.07, 0.94, 0.18, 1.07);
+			opacity: 1;
 		}
 	}
 }
+
 // .card-fan {
 // 	@include fan(10, 60deg);
 // }

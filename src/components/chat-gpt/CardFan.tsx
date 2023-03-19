@@ -44,11 +44,10 @@ const CardFan: React.FC = () => {
 				in
 				appear
 				nodeRef={nodeRef}
-				timeout={800}
+				timeout={1500}
 				onEntered={() => {
 					setIsSpreading(false)
 				}}
-				exit={false}
 			>
 				<div
 					ref={nodeRef}
