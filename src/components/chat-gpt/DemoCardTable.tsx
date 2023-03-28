@@ -14,6 +14,31 @@ const blankTable = () => {
 	}
 }
 
+const sampleTable = () => {
+	const table: ICardTable = {
+		0: {
+			suit: 'spades',
+			rank: 'ace',
+			type: 'regular',
+		},
+		1: {
+			suit: 'hearts',
+			rank: 'queen',
+			type: 'regular',
+		},
+		2: {
+			type: 'joker',
+			id: 'joker1',
+		},
+		3: {
+			suit: 'clubs',
+			rank: 'king',
+			type: 'regular',
+		},
+	}
+	return table
+}
+
 const DemoCardTable: React.FC = () => {
 	const deck = useRef(new Deck().shuffle())
 	const [cardTable, setCardTable] = useState<ICardTable>(blankTable())

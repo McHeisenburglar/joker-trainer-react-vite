@@ -33,7 +33,6 @@ const CardFan: React.FC<CardFanProps> = ({ onCardClick }) => {
 
 	const handleCardClick = (card: Card) => {
 		if (onCardClick) {
-			console.log('hello')
 			onCardClick(card)
 		}
 		const newCards = cards.filter((c) => !isSameCard(c, card))

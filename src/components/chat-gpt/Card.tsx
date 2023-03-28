@@ -18,6 +18,7 @@ const Card: React.FC<Props> = ({
 	onClick,
 	className,
 }) => {
+	console.log('card:', card.type, className)
 	if (card.type === 'regular') {
 		const { suit, rank } = card as IRegularCard
 
@@ -59,7 +60,7 @@ const Card: React.FC<Props> = ({
 		}
 		return (
 			<div
-				className={`card card-size card-face card-joker ${
+				className={`card card-size card-face card-joker golden-shine ${
 					playable ? 'playable' : ''
 				} ${disabled ? 'disabled' : ''} ${color} ${className ? className : ''}`}
 				onClick={handleClick}

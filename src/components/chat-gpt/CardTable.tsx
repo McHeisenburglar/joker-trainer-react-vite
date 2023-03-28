@@ -43,16 +43,7 @@ const CardTable: React.FC<CardTableProps> = ({ cards, startingPlayer }) => {
 								timeout={1000}
 								className="animated-card"
 							>
-								{card ? (
-									<Card
-										card={card}
-										className={`${
-											card.type === 'regular' ? 'golden-shine' : ''
-										}`}
-									/>
-								) : (
-									<CardSlot />
-								)}
+								{card ? <Card card={card} /> : <CardSlot />}
 							</CSSTransition>
 						</TransitionGroup>
 					</div>
