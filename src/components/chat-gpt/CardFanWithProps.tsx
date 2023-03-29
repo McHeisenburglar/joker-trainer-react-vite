@@ -9,42 +9,40 @@ import { isSameCard } from '../../lib/helpers/cardHelpers'
 import { sortCards } from '../../lib/helpers/handHelpers'
 
 interface CardFanProps {
+	cards: Card[]
 	onCardClick?: (card: Card) => void
+	onDealClick?: () => void
 }
 
-const CardFan: React.FC<CardFanProps> = ({ onCardClick }) => {
+const CardFanWithProps: React.FC<CardFanProps> = ({
+	cards,
+	onCardClick,
+	onDealClick,
+}) => {
 	const [isSpreading, setIsSpreading] = React.useState(true)
-	const cardsRef = useRef(new Deck().shuffle().deal(10))
 	const nodeRef = useRef(null)
 
-	const [cards, setCards] = useState(cardsRef.current)
-	const [sortedCards, setSortecCards] = useState(sortCards(cardsRef.current))
+	// const [sortedCards, setSortecCards] = useState(sortCards(cards))
 
-	useEffect(() => {
-		setCards(cardsRef.current)
-	}, [])
-
-	useEffect(() => {
-		const sorted = sortCards(cardsRef.current)
-		setSortecCards(sorted)
-	}, [cards])
+	// useEffect(() => {
+	// 	const sorted = sortCards(cards)
+	// 	setSortecCards(sorted)
+	// }, [cards])
 
 	const toggle = () => {
 		setIsSpreading(!isSpreading)
-	}
-
-	const redeal = () => {
-		cardsRef.current = new Deck().shuffle().deal(10)
-		setCards(cardsRef.current)
 	}
 
 	const handleCardClick = (card: Card) => {
 		if (onCardClick) {
 			onCardClick(card)
 		}
-		const newCards = cards.filter((c) => !isSameCard(c, card))
-		cardsRef.current = newCards
-		setCards(cardsRef.current)
+	}
+
+	const handleDealClick = () => {
+		if (onDealClick) {
+			onDealClick()
+		}
 	}
 
 	return (
@@ -64,7 +62,7 @@ const CardFan: React.FC<CardFanProps> = ({ onCardClick }) => {
 						cards.length
 					}`}
 				>
-					{sortedCards.map((card, index) => (
+					{cards.map((card, index) => (
 						/* <HiddenCard /> */
 						<Card
 							card={card}
@@ -77,10 +75,10 @@ const CardFan: React.FC<CardFanProps> = ({ onCardClick }) => {
 			</CSSTransition>
 			<DevWindow position="bottom-right">
 				<button onClick={toggle}>Spread: {JSON.stringify(isSpreading)}</button>
-				<button onClick={redeal}>Deal again</button>
+				<button onClick={handleDealClick}>Deal again</button>
 			</DevWindow>
 		</div>
 	)
 }
 
-export default CardFan
+export default CardFanWithProps

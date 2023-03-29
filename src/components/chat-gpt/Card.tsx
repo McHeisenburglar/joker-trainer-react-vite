@@ -60,7 +60,7 @@ const Card: React.FC<Props> = ({
 		}
 		return (
 			<div
-				className={`card card-size card-face card-joker golden-shine ${
+				className={`card card-size card-face card-joker ${
 					playable ? 'playable' : ''
 				} ${disabled ? 'disabled' : ''} ${color} ${className ? className : ''}`}
 				onClick={handleClick}

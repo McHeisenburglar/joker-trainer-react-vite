@@ -1,9 +1,12 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Deck } from '../../lib/game-logic/card/CardDeck'
 import { getRandomElement } from '../../lib/helpers/random'
 import CardTable from './CardTable'
 import DevWindow from './DevWindow'
+import CardFanWithProps from './CardFanWithProps'
 import CardFan from './CardFan'
+import { isSameCard } from '../../lib/helpers/cardHelpers'
+import { sortCards } from '../../lib/helpers/handHelpers'
 
 const blankTable = () => {
 	return {
@@ -44,6 +47,15 @@ const DemoCardTable: React.FC = () => {
 	const [cardTable, setCardTable] = useState<ICardTable>(blankTable())
 	const [currentTurn, setCurrentTurn] = useState<PlayerPosition>(0)
 
+	const newSortedHand = () => {
+		const newHand = new Deck().shuffle().deal(10)
+		const sorted = sortCards(newHand)
+		return sorted
+	}
+
+	const myHandRef = useRef(newSortedHand())
+	const [myHand, setMyHand] = useState(myHandRef.current)
+
 	const playCardOnTable = (card: Card, pos: PlayerPosition) => {
 		const newCardTable = { ...cardTable }
 		newCardTable[pos] = card
@@ -82,6 +94,20 @@ const DemoCardTable: React.FC = () => {
 
 	const handleCardClick = (card: Card) => {
 		playCardOnTable(card, 2)
+		removeCardFromHand(card)
+	}
+
+	const removeCardFromHand = (card: Card) => {
+		const newHand = myHandRef.current.filter((c) => !isSameCard(c, card))
+		myHandRef.current = newHand
+		setMyHand(newHand)
+	}
+
+	const handleDealClick = () => {
+		const newHand = newSortedHand()
+		// console.log('ayy')
+		myHandRef.current = newHand
+		setMyHand(newHand)
 	}
 
 	return (
@@ -100,6 +126,11 @@ const DemoCardTable: React.FC = () => {
 				<button onClick={clearTable}>Clear table</button>
 			</DevWindow>
 			<CardFan onCardClick={handleCardClick} />
+			{/* <CardFanWithProps
+				cards={myHand}
+				onCardClick={handleCardClick}
+				onDealClick={handleDealClick}
+			/> */}
 		</div>
 	)
 }
