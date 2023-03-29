@@ -206,7 +206,7 @@ ul.horizontal-list {
 	transform: translate(-50%, -50%);
 	width: 40rem;
 	height: 40rem;
-	overflow: hidden;
+	overflow: visible;
 	pointer-events: none;
 
 	.card-table-item {
@@ -239,8 +239,10 @@ ul.horizontal-list {
 	.card,
 	.card-slot {
 		position: absolute;
-		transform: translate(-50%, -50%) translateY(-$card-table-distance)
-			rotate(0deg);
+		// transform: translate(-50%, -50%) translateY(-$card-table-distance)
+		// 	rotate(0deg);
+		transform: translate(-50%, -50%) rotate(-180deg)
+			translateY($card-table-distance);
 	}
 }
 
@@ -248,8 +250,10 @@ ul.horizontal-list {
 	.card,
 	.card-slot {
 		position: absolute;
-		transform: translate(-50%, -50%) translateX($card-table-distance)
-			rotate(90deg);
+		// transform: translate(-50%, -50%) translateX($card-table-distance)
+		// 	rotate(90deg);
+		transform: translate(-50%, -50%) rotate(-90deg)
+			translateY($card-table-distance);
 	}
 }
 
@@ -257,8 +261,10 @@ ul.horizontal-list {
 	.card,
 	.card-slot {
 		position: absolute;
-		transform: translate(-50%, -50%) translateY($card-table-distance)
-			rotate(180deg);
+		// transform: translate(-50%, -50%) translateY($card-table-distance)
+		// 	rotate(180deg);
+		transform: translate(-50%, -50%) rotate(0deg)
+			translateY($card-table-distance);
 	}
 }
 
@@ -266,8 +272,10 @@ ul.horizontal-list {
 	.card,
 	.card-slot {
 		position: absolute;
-		transform: translate(-50%, -50%) translateX(-$card-table-distance)
-			rotate(-90deg);
+		// transform: translate(-50%, -50%) translateX(-$card-table-distance)
+		// 	rotate(-90deg);
+		transform: translate(-50%, -50%) rotate(90deg)
+			translateY($card-table-distance);
 	}
 }
 
@@ -328,6 +336,9 @@ ul.horizontal-list {
 	font-size: 16px;
 	font-family: Arial, sans-serif;
 	z-index: 9999;
+	div.section {
+		margin-bottom: 16px;
+	}
 }
 
 .dev-window.top-right {

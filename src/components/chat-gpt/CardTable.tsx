@@ -40,8 +40,8 @@ const CardTable: React.FC<CardTableProps> = ({ cards, startingPlayer }) => {
 							<CSSTransition
 								key={JSON.stringify(card)}
 								in={!!card}
-								timeout={1000}
-								className="animated-card"
+								timeout={3000}
+								className="animated-card goes-left"
 							>
 								{card ? <Card card={card} /> : <CardSlot />}
 							</CSSTransition>

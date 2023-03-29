@@ -20,6 +20,11 @@ export function shuffleAlg<T>(array: T[]): T[] {
 	return array
 }
 
+export function getRandomCard(): Card {
+	const card = new CardDeck().shuffle().pop()
+	return card
+}
+
 export function getRandomCards(numCards: number): IRegularCard[] {
 	let deck = new CardDeck()
 	deck.shuffle()
