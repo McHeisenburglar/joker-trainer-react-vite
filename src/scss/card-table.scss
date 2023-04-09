@@ -14,8 +14,8 @@ $transition: all 700ms $card-timing-function;
 	$transform-direction: translateY(-$card-table-distance);
 	$transform-origin: translateY(-$entrance-distance);
 
-	$exit-distance-v: 200px;
-	$exit-distance-h: 300px;
+	$exit-distance-v: 600px;
+	$exit-distance-h: 800px;
 	$exit-left-rotation: 0deg;
 	$exit-top-rotation: 0deg;
 	$exit-right-rotation: 0deg;
@@ -65,12 +65,19 @@ $transition: all 700ms $card-timing-function;
 			opacity: 0;
 			perspective: 200px;
 			transform: $transform-all $transform-rotate translateY(400px);
+
+			// joker under
+			// transform: $transform-all $transform-rotate translateY(600px)
+			// 	perspective(200px) rotateX(60deg) scale(1);
 		}
 		.animated-card.enter-active {
 			transition: $transition;
 
 			opacity: 1;
 			transform: $transform-all $transform-rotate translateY(100px);
+
+			//joker under
+			// transition: 1200ms cubic-bezier(0.44, -0.02, 0.1, 1.02);
 		}
 		.animated-card.enter-done {
 			opacity: 1;
@@ -92,7 +99,7 @@ $transition: all 700ms $card-timing-function;
 				}
 				&.exit-active {
 					transition: transform $exit-duration $exit-timing-function,
-						opacity 400ms cubic-bezier(0.78, 0.02, 0.78, 0.93) 700ms;
+						opacity 300ms cubic-bezier(0.78, 0.02, 0.78, 0.93) 300ms;
 					opacity: 0;
 				}
 			}
