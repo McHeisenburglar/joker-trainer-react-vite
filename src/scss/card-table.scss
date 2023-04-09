@@ -14,7 +14,8 @@ $transition: all 700ms $card-timing-function;
 	$transform-direction: translateY(-$card-table-distance);
 	$transform-origin: translateY(-$entrance-distance);
 
-	$exit-distance: 200px;
+	$exit-distance-v: 200px;
+	$exit-distance-h: 300px;
 	$exit-left-rotation: 0deg;
 	$exit-top-rotation: 0deg;
 	$exit-right-rotation: 0deg;
@@ -97,19 +98,19 @@ $transition: all 700ms $card-timing-function;
 			}
 
 			&.goes-top.exit-active {
-				transform: translate(-50%, -50%) translateY(-$exit-distance)
+				transform: translate(-50%, -50%) translateY(-$exit-distance-v)
 					rotate($exit-top-rotation);
 			}
 			&.goes-right.exit-active {
-				transform: translate(-50%, -50%) translateX($exit-distance)
+				transform: translate(-50%, -50%) translateX($exit-distance-h)
 					rotate($exit-right-rotation);
 			}
 			&.goes-bottom.exit-active {
-				transform: translate(-50%, -50%) translateY($exit-distance)
+				transform: translate(-50%, -50%) translateY($exit-distance-v)
 					rotate($exit-bottom-rotation);
 			}
 			&.goes-left.exit-active {
-				transform: translate(-50%, -50%) translateX(-$exit-distance)
+				transform: translate(-50%, -50%) translateX(-$exit-distance-h)
 					rotate($exit-left-rotation);
 			}
 		}
@@ -129,7 +130,7 @@ $transition: all 700ms $card-timing-function;
 }
 .animated-card.fade.exit-active {
 	opacity: 0;
-	transition: all 200ms;
+	transition: all 500ms;
 	position: absolute;
 }
 

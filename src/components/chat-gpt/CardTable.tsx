@@ -13,10 +13,14 @@ import { start } from 'repl'
 type CardTableProps = {
 	cards: ICardTable
 	startingPlayer?: PlayerPosition
+	exitDirection?: 'top' | 'right' | 'bottom' | 'left'
 }
 
-const CardTable: React.FC<CardTableProps> = ({ cards, startingPlayer }) => {
-	const ref = React.useRef<HTMLDivElement>(null)
+const CardTable: React.FC<CardTableProps> = ({
+	cards,
+	startingPlayer,
+	exitDirection,
+}) => {
 	const positions = ['top', 'right', 'bottom', 'left']
 	return (
 		<div className="card-table card-table-animated">
@@ -41,7 +45,9 @@ const CardTable: React.FC<CardTableProps> = ({ cards, startingPlayer }) => {
 								key={JSON.stringify(card)}
 								in={!!card}
 								timeout={3000}
-								className="animated-card goes-bottom"
+								className={`animated-card ${
+									exitDirection ? exitDirection : 'fade'
+								}`}
 							>
 								{card ? <Card card={card} /> : <CardSlot />}
 							</CSSTransition>
