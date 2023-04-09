@@ -11,6 +11,7 @@ import CardFanWithProps from './CardFanWithProps'
 import CardFan from './CardFan'
 import { isSameCard } from '../../lib/helpers/cardHelpers'
 import { sortCards } from '../../lib/helpers/handHelpers'
+import useUpdateEffect from '../../hooks/useUpdateEffect'
 
 const blankTable = () => {
 	return {
@@ -59,6 +60,9 @@ const DemoCardTable: React.FC = () => {
 	const deck = useRef(new Deck().shuffle())
 	const [cardTable, setCardTable] = useState<ICardTable>(blankTable())
 	const [currentTurn, setCurrentTurn] = useState<PlayerPosition>(0)
+
+	type IDirectionType = 'top' | 'right' | 'bottom' | 'left' | null
+	const [exitDirection, setExitDirection] = useState<IDirectionType>(null)
 
 	const newSortedHand = () => {
 		const newHand = new Deck().shuffle().deal(10)
@@ -131,14 +135,21 @@ const DemoCardTable: React.FC = () => {
 		setMyHand(newHand)
 	}
 
-	const goesToPlayer = (pos: PlayerPosition) => {
+	useUpdateEffect(() => {
 		clearTable()
-		// return
+	}, [exitDirection])
+
+	const goesToPlayer = (pos: IDirectionType) => {
+		setExitDirection(pos)
 	}
 
 	return (
 		<div className="demo-card-table">
-			<CardTable cards={cardTable} startingPlayer={0} />
+			<CardTable
+				cards={cardTable}
+				startingPlayer={0}
+				exitDirection={exitDirection}
+			/>
 			<DevWindow position="bottom-left">
 				<div className="section">
 					<button onClick={next}>Next</button>
@@ -159,7 +170,7 @@ const DemoCardTable: React.FC = () => {
 				<div>
 					<h3>Goes to player:</h3>
 					{['top', 'right', 'bottom', 'left'].map((position, index) => {
-						const pos = index as PlayerPosition
+						const pos = position as IDirectionType
 						return (
 							<button onClick={() => goesToPlayer(pos)} key={position}>
 								{position}

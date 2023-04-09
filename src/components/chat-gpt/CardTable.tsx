@@ -8,12 +8,11 @@ import {
 } from 'react-transition-group'
 import Card from './Card'
 import CardSlot from './CardSlot'
-import { start } from 'repl'
 
 type CardTableProps = {
 	cards: ICardTable
 	startingPlayer?: PlayerPosition
-	exitDirection?: 'top' | 'right' | 'bottom' | 'left'
+	exitDirection?: 'top' | 'right' | 'bottom' | 'left' | null
 }
 
 const CardTable: React.FC<CardTableProps> = ({
@@ -21,6 +20,7 @@ const CardTable: React.FC<CardTableProps> = ({
 	startingPlayer,
 	exitDirection,
 }) => {
+	console.log(exitDirection)
 	const positions = ['top', 'right', 'bottom', 'left']
 	return (
 		<div className="card-table card-table-animated">
@@ -46,7 +46,7 @@ const CardTable: React.FC<CardTableProps> = ({
 								in={!!card}
 								timeout={3000}
 								className={`animated-card ${
-									exitDirection ? exitDirection : 'fade'
+									exitDirection ? `goes-${exitDirection}` : 'fade'
 								}`}
 							>
 								{card ? <Card card={card} /> : <CardSlot />}

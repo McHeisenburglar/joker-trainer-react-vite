@@ -18,7 +18,6 @@ const Card: React.FC<Props> = ({
 	onClick,
 	className,
 }) => {
-	console.log('card:', card.type, className)
 	if (card.type === 'regular') {
 		const { suit, rank } = card as IRegularCard
 
