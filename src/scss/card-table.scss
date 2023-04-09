@@ -10,8 +10,6 @@ $transition: all 700ms $card-timing-function;
 	$rotation-degrees: 0deg;
 
 	$transform-scale: scale(0.8);
-	// $transform-direction: translate(100px);
-	// $transform-origin: translate($entrance-distance);
 
 	$transform-direction: translateY(-$card-table-distance);
 	$transform-origin: translateY(-$entrance-distance);
@@ -23,27 +21,22 @@ $transition: all 700ms $card-timing-function;
 	$exit-bottom-rotation: 0deg;
 
 	@if $position == top {
-		// $transform-origin: translateY(-$entrance-distance);
 		$transform-direction: translateY(-$card-table-distance);
 		$rotation-degrees: 180deg;
 
-		// exit rotation
 		$exit-left-rotation: -90deg;
 		$exit-top-rotation: 180deg;
 		$exit-right-rotation: 90deg;
 		$exit-bottom-rotation: 180deg;
 	} @else if $position == right {
-		// $transform-origin: translateX($entrance-distance);
 		$transform-direction: translateX($card-table-distance);
 		$rotation-degrees: -90deg;
 
-		// exit rotation
 		$exit-left-rotation: -90deg;
 		$exit-top-rotation: 0deg;
 		$exit-right-rotation: -90deg;
 		$exit-bottom-rotation: -180deg;
 	} @else if $position == bottom {
-		// $transform-origin: translateY($entrance-distance);
 		$transform-direction: translateY($card-table-distance);
 		$rotation-degrees: 0deg;
 
@@ -53,11 +46,9 @@ $transition: all 700ms $card-timing-function;
 		$exit-right-rotation: 90deg;
 		$exit-bottom-rotation: 0deg;
 	} @else if $position == left {
-		// $transform-origin: translateY(-$entrance-distance);
 		$transform-direction: translateX(-$card-table-distance);
 		$rotation-degrees: 90deg;
 
-		// exit rotation
 		$exit-left-rotation: 90deg;
 		$exit-top-rotation: 0deg;
 		$exit-right-rotation: 90deg;
@@ -72,8 +63,6 @@ $transition: all 700ms $card-timing-function;
 		.animated-card.enter {
 			opacity: 0;
 			perspective: 200px;
-			// transform: $transform-all $transform-direction $transform-rotate
-			// 	$transform-origin $transform-scale rotateX(80deg) translateZ(400px);
 			transform: $transform-all $transform-rotate translateY(400px);
 		}
 		.animated-card.enter-active {
@@ -81,47 +70,14 @@ $transition: all 700ms $card-timing-function;
 
 			opacity: 1;
 			transform: $transform-all $transform-rotate translateY(100px);
-			// transform: $transform-all $transform-direction $transform-rotate;
 		}
 		.animated-card.enter-done {
 			opacity: 1;
 		}
 	}
 
-	$exit-duration: 800ms;
-	// $exit-timing-function: cubic-bezier(0.98, -0.2, 0.16, 1.11);
-
-	// $exit-timing-function: cubic-bezier(0.74, -0.15, 0.29, 1.02);
-	// $exit-timing-function: cubic-bezier(0.77, -0.2, 0.23, 1.09);
-	// $exit-timing-function: cubic-bezier(0.95, -0.01, 0.34, 1);
-	// $exit-timing-function: cubic-bezier(0.65, 0, 0.34, 1);
-	// $exit-timing-function: cubic-bezier(0.77, -0.36, 1, 0.82);
 	$exit-timing-function: cubic-bezier(0.82, -0.35, 0.54, 1.03);
-
-	$exit-transition: all $exit-duration $exit-timing-function;
-
-	.animated-card {
-		&.goes-left {
-			&.exit {
-				z-index: -1;
-				opacity: 1;
-				position: absolute;
-			}
-			&.exit-active {
-				opacity: 1;
-				// transform: $transform-all $transform-direction $transform-rotate
-				// 	$transform-origin $transform-scale rotateX(80deg) translateZ(400px);
-				// transform: translate(-400%, -50%) translateX(100px) rotate(($rotation-degrees + 90deg));
-
-				// transition: all 400ms;
-				transition: $exit-transition;
-				position: absolute;
-			}
-			&.exit-done {
-				opacity: 0;
-			}
-		}
-	}
+	$exit-duration: 800ms;
 
 	.#{$position} {
 		.animated-card {
@@ -157,181 +113,6 @@ $transition: all 700ms $card-timing-function;
 					rotate($exit-left-rotation);
 			}
 		}
-		//goes left
-		// .animated-card.goes-left.exit {
-		// 	transform: translate(-50%, -50%) rotate($rotation-degrees)
-		// 		translateY(100px);
-		// }
-		// @if $position == left {
-		// 	.animated-card.goes-left.exit-active {
-		// 		transform: translate(-50%, -50%)
-		// 			translateX(-$exit-distance)
-		// 			rotate(90deg);
-		// 		// transform: translate(-50%, -50%) rotate(90deg) translateY(400px);
-		// 	}
-		// } @else if $position == top {
-		// 	.animated-card.goes-left.exit-active {
-		// 		transform: translate(-50%, -50%)
-		// 			translateX(-$exit-distance)
-		// 			rotate(-90deg);
-		// 		// transform: translate(-50%, -50%) rotate(90deg) translateY(400px);
-		// 	}
-		// } @else if $position == right {
-		// 	.animated-card.goes-left.exit-active {
-		// 		transform: translate(-50%, -50%)
-		// 			translateX(-$exit-distance)
-		// 			rotate(-90deg);
-		// 		// transform: translate(-50%, -50%) rotate(90deg) translateY(400px);
-		// 	}
-		// } @else if $position == bottom {
-		// 	.animated-card.goes-left.exit-active {
-		// 		transform: translate(-50%, -50%)
-		// 			translateX(-$exit-distance)
-		// 			rotate(-90deg);
-		// 		// transform: translate(-50%, -50%) rotate(90deg) translateY(400px);
-		// 	}
-		// 	// .animated-card.goes-left.exit-active {
-		// 	// 	opacity: 0;
-		// 	// }
-		// }
-		// .animated-card.goes-left.exit-active {
-		// 	transition: transform $exit-duration $exit-timing-function,
-		// 		opacity 400ms cubic-bezier(0.78, 0.02, 0.78, 0.93) 700ms;
-		// 	// transition: transform $exit-duration $exit-timing-function,
-		// 	// 	opacity 200ms cubic-bezier(0.78, 0.02, 0.78, 0.93) 300ms;
-		// 	opacity: 0;
-		// }
-
-		// // goes top
-		// .animated-card.goes-top.exit {
-		// 	transform: translate(-50%, -50%) rotate($rotation-degrees)
-		// 		translateY(100px);
-		// }
-		// @if $position == left {
-		// 	.animated-card.goes-top.exit-active {
-		// 		transform: translate(-50%, -50%)
-		// 			translateY(-$exit-distance)
-		// 			rotate(0deg);
-		// 		// transform: translate(-50%, -50%) rotate(90deg) translateY(400px);
-		// 	}
-		// } @else if $position == top {
-		// 	.animated-card.goes-top.exit-active {
-		// 		transform: translate(-50%, -50%)
-		// 			translateY(-$exit-distance)
-		// 			rotate(180deg);
-		// 		// transform: translate(-50%, -50%) rotate(90deg) translateY(400px);
-		// 	}
-		// } @else if $position == right {
-		// 	.animated-card.goes-top.exit-active {
-		// 		transform: translate(-50%, -50%)
-		// 			translateY(-$exit-distance)
-		// 			rotate(0deg);
-		// 		// transform: translate(-50%, -50%) rotate(90deg) translateY(400px);
-		// 	}
-		// } @else if $position == bottom {
-		// 	.animated-card.goes-top.exit-active {
-		// 		transform: translate(-50%, -50%)
-		// 			translateY(-$exit-distance)
-		// 			rotate(0deg);
-		// 		// transform: translate(-50%, -50%) rotate(90deg) translateY(400px);
-		// 	}
-		// 	// .animated-card.goes-top.exit-active {
-		// 	// 	opacity: 0;
-		// 	// }
-		// }
-		// .animated-card.goes-top.exit-active {
-		// 	transition: transform $exit-duration $exit-timing-function,
-		// 		opacity 400ms cubic-bezier(0.78, 0.02, 0.78, 0.93) 700ms;
-		// 	opacity: 0;
-		// }
-
-		// // goes right
-		// .animated-card.goes-right.exit {
-		// 	transform: translate(-50%, -50%) rotate($rotation-degrees)
-		// 		translateY(100px);
-		// }
-		// @if $position == left {
-		// 	.animated-card.goes-right.exit-active {
-		// 		transform: translate(-50%, -50%)
-		// 			translateX($exit-distance)
-		// 			rotate(90deg);
-		// 		// transform: translate(-50%, -50%) rotate(90deg) translateY(400px);
-		// 	}
-		// } @else if $position == top {
-		// 	.animated-card.goes-right.exit-active {
-		// 		transform: translate(-50%, -50%)
-		// 			translateX($exit-distance)
-		// 			rotate(90deg);
-		// 		// transform: translate(-50%, -50%) rotate(90deg) translateY(400px);
-		// 	}
-		// } @else if $position == right {
-		// 	.animated-card.goes-right.exit-active {
-		// 		transform: translate(-50%, -50%)
-		// 			translateX($exit-distance)
-		// 			rotate(-90deg);
-		// 		// transform: translate(-50%, -50%) rotate(90deg) translateY(400px);
-		// 	}
-		// } @else if $position == bottom {
-		// 	.animated-card.goes-right.exit-active {
-		// 		transform: translate(-50%, -50%)
-		// 			translateX($exit-distance)
-		// 			rotate(90deg);
-		// 		// transform: translate(-50%, -50%) rotate(90deg) translateY(400px);
-		// 	}
-		// 	// .animated-card.goes-left.exit-active {
-		// 	// 	opacity: 0;
-		// 	// }
-		// }
-		// .animated-card.goes-right.exit-active {
-		// 	transition: transform $exit-duration $exit-timing-function,
-		// 		opacity 400ms cubic-bezier(0.78, 0.02, 0.78, 0.93) 700ms;
-		// 	// transition: transform $exit-duration $exit-timing-function,
-		// 	// 	opacity 200ms cubic-bezier(0.78, 0.02, 0.78, 0.93) 300ms;
-		// 	opacity: 0;
-		// }
-
-		// // goes bottom
-		// .animated-card.goes-bottom.exit {
-		// 	transform: translate(-50%, -50%) rotate($rotation-degrees)
-		// 		translateY(100px);
-		// }
-		// @if $position == left {
-		// 	.animated-card.goes-bottom.exit-active {
-		// 		transform: translate(-50%, -50%)
-		// 			translateY($exit-distance)
-		// 			rotate(-180deg);
-		// 		// transform: translate(-50%, -50%) rotate(90deg) translateY(400px);
-		// 	}
-		// } @else if $position == top {
-		// 	.animated-card.goes-bottom.exit-active {
-		// 		transform: translate(-50%, -50%)
-		// 			translateY($exit-distance)
-		// 			rotate(180deg);
-		// 		// transform: translate(-50%, -50%) rotate(90deg) translateY(400px);
-		// 	}
-		// } @else if $position == right {
-		// 	.animated-card.goes-bottom.exit-active {
-		// 		transform: translate(-50%, -50%)
-		// 			translateY($exit-distance)
-		// 			rotate(-180deg);
-		// 		// transform: translate(-50%, -50%) rotate(90deg) translateY(400px);
-		// 	}
-		// } @else if $position == bottom {
-		// 	.animated-card.goes-bottom.exit-active {
-		// 		transform: translate(-50%, -50%)
-		// 			translateY($exit-distance)
-		// 			rotate(0deg);
-		// 		// transform: translate(-50%, -50%) rotate(90deg) translateY(400px);
-		// 	}
-		// 	// .animated-card.goes-top.exit-active {
-		// 	// 	opacity: 0;
-		// 	// }
-		// }
-		// .animated-card.goes-bottom.exit-active {
-		// 	transition: transform $exit-duration $exit-timing-function,
-		// 		opacity 400ms cubic-bezier(0.78, 0.02, 0.78, 0.93) 700ms;
-		// 	opacity: 0;
-		// }
 	}
 }
 
@@ -339,31 +120,6 @@ $transition: all 700ms $card-timing-function;
 @include card-transform(right);
 @include card-transform(bottom);
 @include card-transform(left);
-// @include card-transform(bottom);
-
-// Enter animation
-// .top {
-// 	.animated-card.enter {
-// 		// .card {
-// 		perspective: 200px;
-// 		transform: translate(-50%, -50%) translateY(-100px) translateY(-150%)
-// 			scale(1.3);
-// 		// }
-// 	}
-// 	.animated-card.enter-active {
-// 		// .card {
-// 		opacity: 1;
-// 		transform: translate(-50%, -50%) translateY(-100px) translateY(0);
-// 		transition: $transition;
-// 		transition-timing-function: $card-timing-function;
-
-// 		// }
-// 	}
-
-// 	.animated-card.enter-done {
-// 		opacity: 1;
-// 	}
-// }
 
 // Exit animation
 .animated-card.fade.exit {
@@ -380,9 +136,6 @@ $transition: all 700ms $card-timing-function;
 .animated-card.fade.exit-done {
 	opacity: 0;
 }
-
-// .animated-card {
-// }
 
 .animated-card.card-slot.exit {
 	z-index: -100;
