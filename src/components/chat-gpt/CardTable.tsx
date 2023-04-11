@@ -20,7 +20,6 @@ const CardTable: React.FC<CardTableProps> = ({
 	startingPlayer,
 	exitDirection,
 }) => {
-	console.log(exitDirection)
 	const positions = ['top', 'right', 'bottom', 'left']
 	return (
 		<div className="card-table card-table-animated">

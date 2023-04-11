@@ -136,7 +136,8 @@ const DemoCardTable: React.FC = () => {
 	}
 
 	useUpdateEffect(() => {
-		clearTable()
+		!!exitDirection && clearTable()
+		setExitDirection(null)
 	}, [exitDirection])
 
 	const goesToPlayer = (pos: IDirectionType) => {
