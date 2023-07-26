@@ -84,6 +84,37 @@ $transition: all 700ms $card-timing-function;
 		}
 	}
 
+	.#{$position} {
+		.animated-card.joker-over.enter {
+			// opacity: 0;
+			perspective: 200px;
+			transform: $transform-all $transform-rotate translateY(400px) scale(5);
+		}
+		.animated-card.joker-over.enter-active {
+			transition: all 1000ms $card-timing-function, opacity 1200ms ease-in-out;
+
+			opacity: 1;
+			transform: $transform-all $transform-rotate translateY(100px);
+		}
+		.animated-card.joker-over.enter-done {
+			opacity: 1;
+		}
+
+		.animated-card.joker-under.enter {
+			perspective: 200px;
+			transform: $transform-all $transform-rotate translate6(800px) scale(0.5);
+		}
+		.animated-card.joker-under.enter-active {
+			transition: all 2000ms $card-timing-function;
+
+			opacity: 0.8;
+			transform: $transform-all $transform-rotate translateY(100px);
+		}
+		.animated-card.joker-under.enter-done {
+			opacity: 0.8;
+		}
+	}
+
 	$exit-timing-function: cubic-bezier(0.82, -0.35, 0.54, 1.03);
 	$exit-duration: 800ms;
 

@@ -46,7 +46,7 @@ const CardTable: React.FC<CardTableProps> = ({
 								timeout={3000}
 								className={`animated-card ${
 									exitDirection ? `goes-${exitDirection}` : 'fade'
-								}`}
+								} ${card?.type === 'joker' ? 'joker-under' : ''}`}
 							>
 								{card ? <Card card={card} /> : <CardSlot />}
 							</CSSTransition>

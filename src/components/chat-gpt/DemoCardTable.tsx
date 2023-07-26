@@ -105,8 +105,27 @@ const DemoCardTable: React.FC = () => {
 		playCardOnTable(cardToPlay, pos)
 	}
 
+	const playJokerFrom = (pos: PlayerPosition) => {
+		if (cardTable[pos]?.type === 'joker') {
+			clearSide(pos)
+			return
+		}
+
+		const card: IJokerCard = {
+			id: 'joker1',
+			type: 'joker',
+		}
+		playCardOnTable(card, pos)
+	}
+
 	const clearTable = () => {
 		setCardTable(blankTable())
+	}
+
+	const clearSide = (pos: PlayerPosition) => {
+		const current = { ...cardTable }
+		current[pos] = null
+		setCardTable(current)
 	}
 
 	const fillTable = () => {
@@ -174,6 +193,17 @@ const DemoCardTable: React.FC = () => {
 						const pos = position as IDirectionType
 						return (
 							<button onClick={() => goesToPlayer(pos)} key={position}>
+								{position}
+							</button>
+						)
+					})}
+				</div>
+				<div className="section">
+					<h3>Joker from</h3>
+					{['top', 'right', 'bottom', 'left'].map((position, index) => {
+						const pos = index as PlayerPosition
+						return (
+							<button onClick={() => playJokerFrom(pos)} key={position}>
 								{position}
 							</button>
 						)
