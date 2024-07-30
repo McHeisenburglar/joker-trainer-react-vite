@@ -1,1 +1,1 @@
-# partners-in-crime
+# Joker Card Game client
